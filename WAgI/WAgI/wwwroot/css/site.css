@@ -28,7 +28,7 @@
     color: rgb(166, 170, 166);
 }
 
-.navBar a.active {
+.navBar .active {
     color: rgb(166, 170, 166);
 }
 
