@@ -2,27 +2,14 @@
     ViewData["Title"] = "About";
 }
 
+@section Styles{
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/about.css" />
+        <script src="~/js/ShowText.js"></script>
+    </environment>
+}
 
 <div class="data-conatiner">
-    <script>
-        function show(target) {
-            var inputs = document.getElementsByClassName('TextZone');
-            console.log(document.getElementById(target));
-            for(var i = 0; i < inputs.length; i++) {
-                if (inputs[i] === document.getElementById(target)) {
-                    inputs[i].style.display = 'block';
-                } else {
-                    inputs[i].style.display = 'none';
-                }
-            }
-
-            document.getElementById(target).style.display = 'block';
-        }
-        function hide(target){
-            document.getElementById(target).style.display = 'none';
-            document.getElementById("clickMeId").style.display = 'block';
-        }
-    </script>
     <div class="news-container">
 
         <div id="cf" class="images">
@@ -39,7 +26,7 @@
 
     </div>
 
-    <div class="content">
+    <div class="Content">
         
         <div id="defaultComent"  class="TextZone">
             <p>Click </p>
@@ -65,14 +52,25 @@
                 anvergura aceasta echipa isi propune din nou realizarea imposibilului(Sa cada de acord pe culori).<br>
                 Provocarea acum este jocul WaGI care va fi abordat ca si o continuare a platformerului "Web Village" - inca ne lansat
                 Ganduri cu care echipa porneste la drum: <br />
-                -Cimpoesu Razvan:"De data asta nu beau mai mult de 20 de energizante"<br />
-                -Dorneanu Adrian:"We nustiu..Mi se pare labareala"<br />
-                -Corfu Alexandru:"NaaaaaNIIIIIIII!!!!"<br />
-                -Radu Vulpesci:"We.. ma culc "<br />
+                -Cimpoesu Razvan:"De data asta nu bem mai mult de 4 energizante pe zi"<br />
+                -Dorneanu Adrian:"Facem, cum nu> facem!"<br />
+                -Corfu Alexandru:"Hai sa nu mai facem iar in Java..."<br />
+                -Radu Vulpescu:"Hai sa terminam si noi treaba mai repede!"<br />
             </p>
         </div>
 
     </div>
 
 </div>
+
+
+@section Scripts{
+    <script>
+        var about = document.getElementsByClassName('activeAbout');
+        for (var i = 0; i < about.length; i++) {
+            about[i].style.backgroundColor = "white";
+            about[i].style.color = "#3d3d3d";
+        }
+    </script>
+}
 

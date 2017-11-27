@@ -3,6 +3,13 @@
     padding-bottom: 20px;
     background-color: #efefef;
     margin: 0;
+    background-image: url("../images/home/background.jpg");
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
 }
 
 /*
@@ -10,31 +17,30 @@
 */
 
 .navBar {
+    z-index:10000;
     position: fixed;
     top: 0;
-    background-color: #2D2D2D;
+    background-color: #010902;
+    opacity: .7;
     text-align: center;
     padding: 10px;
     width: 100%;
     overflow: hidden;
 }
 
-.navBar a {
-    padding: 14px 60px;
-    font-size: 18px;
-    margin: 20px;
-    text-decoration: none;
-    color: #efefef;
-    font-family: "Verdana"
-}
+    .navBar a {
+        padding: 14px 60px;
+        font-size: 18px;
+        margin: 20px;
+        text-decoration: none;
+        color: #FFFFFF;
+        font-family: "Verdana"
+    }
 
-.navBar a:hover:not(.active) {
-    color: rgb(166, 170, 166);
-}
-
-.navBar a.active {
-    color: rgb(166, 170, 166);
-}
+        .navBar a:hover {
+            -webkit-transition: 300ms ease;
+            color: rgb(166, 170, 166);
+        }
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
@@ -53,69 +59,81 @@
     }
 }
 
-/*About page*/
-.data-conatiner {
-    position: relative;
-    top: 0;
-    left: 5%;
+/*Portrait responsive*/
+
+@media screen and (min-width: 320px) and (max-width: 359px) {
+
+    .navBar a {
+        margin: 11px;
+        padding: 1px 10px 1px 10px;
+        display: inline-block;
+    }
 }
 
-.news-container {
-    width: 45%;
-    float: left;
-    top: 5%;
-    display: block;
-    position: relative;
-    left: 60px;
-}
-.skema {
-    position: absolute;
-    top:0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+@media screen and (min-width: 360px) and (max-width: 379px) {
+
+    .navBar a {
+        margin: 11px;
+        padding: 1px 10px 1px 10px;
+        display: inline-block;
+    }
 }
 
-#cf {
-    position:relative;
-    height:350px;
-    width:450px;
-    margin:0 auto;
+@media screen and (min-width: 380px) and (max-width: 479px) {
+    .navBar a {
+        margin: 11px;
+        padding: 1px 10px 1px 10px;
+        display: inline-block;
+    }
 }
 
-#cf img {
-    position:absolute;
-    left:-10%;
-    -webkit-transition: opacity 1s ease-in-out;
-    -moz-transition: opacity 1s ease-in-out;
-    -o-transition: opacity 1s ease-in-out;
-    transition: opacity 1s ease-in-out;
+@media screen and (min-width: 480px) and (max-width: 584px) {
+
+    .navBar a {
+        margin: 11px;
+        padding: 1px 10px 1px 10px;
+        display: inline-block;
+    }
 }
 
-#cf img.top:hover {
-    opacity:0;
-}
-.bottom {
-    width: 103%;
-    height: 107%;
+@media screen and (min-width: 585px) and (max-width: 767px) {
+
+    .navBar a {
+        margin: 11px;
+        padding: 1px 10px 1px 10px;
+        display: inline-block;
+    }
 }
 
-.top {
-    width: 100%;
-    height: 107%;
+
+/*Landscape responsive*/
+@media screen and (min-width: 585px) and (max-width: 618px) {
+    .navBar a {
+        padding: 14px 5px;
+    }
 }
 
-#defaultComent {
-    position: absolute;
-    left: 45%;
-    font-size: 50px;
-    font-weight: bold;
+@media screen and (min-width: 619px) and (max-width: 767px) {
+    .navBar a {
+        padding: 14px 10px;
+    }
 }
 
-.content {
-    width: 90%;
-    position: absolute;
-    left: 20px;
-    top: 400px;
-    font-family: "Comic Sans MS";
+@media screen and (min-width: 768px) and (max-width: 867px) {
+    .navBar a {
+        padding: 14px 15px;
+    }
+}
+
+
+@media screen and (min-width: 868px) and (max-width: 1023px) {
+    .navBar a {
+        padding: 14px 20px;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1900px) {
+    .navBar a {
+        padding: 14px 30px;
+    }
 }

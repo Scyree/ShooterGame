@@ -1,0 +1,25 @@
+﻿
+.content {
+    margin-top: inherit;
+    width: 100%;
+    height: 90%;
+    display: block;
+    margin-left: -1%;
+    position: fixed;
+}
+
+.play-content {
+    margin-top: 12%;
+    margin-left: 24%;
+    width: 50%;
+    height: 44%;
+    text-align: center;
+    -moz-box-shadow: 3px 3px 5px 6px #020d03;
+    -webkit-box-shadow: 3px 3px 5px 6px #020d03;
+    box-shadow: 3px 3px 5px 6px #020d03;
+}
+
+#aud {
+    width: 10%;
+    height: auto;
+}

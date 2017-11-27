@@ -1,0 +1,224 @@
+﻿
+.content {
+    margin-top: inherit;
+    width: 100%;
+    height: 90%;
+    display: block;
+    margin-left: -1%;
+}
+
+.home-content {
+    margin-top: 12%;
+    margin-left: 24%;
+    width: 50%;
+    height: 30%;
+    -moz-box-shadow: 3px 3px 5px 6px #020d03;
+    -webkit-box-shadow: 3px 3px 5px 6px #020d03;
+    box-shadow: 3px 3px 5px 6px #020d03;
+    text-align: center;
+    position: relative;
+}
+
+#image {
+    width: 100%;
+    height: auto;
+}
+
+.slides {
+    display: none;
+}
+.border{
+    border:15px solid;
+    border-color:fuchsia;
+}
+
+#arrow {
+    width: 70px;
+    height: 70px;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 35%;
+    padding: 15px;
+    color: #020d03;
+    opacity: .8;
+    font-weight: bold;
+    font-size: 90px;
+    transition: 0.6s ease;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.next {
+    right: 0%;
+}
+
+.prev {
+    left: 0%;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgb(13, 28, 33);
+    opacity: .7;
+}
+
+/* Fading animation */
+
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: .5s;
+    animation-name: fade;
+    animation-duration: .5s;
+}
+
+@-webkit-keyframes fade {
+    from {
+        opacity: .2
+    }
+
+    to {
+        opacity: .5
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: .2
+    }
+
+    to {
+        opacity: .5
+    }
+}
+
+/* Overlay-ul*/
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgb(13, 28, 33);
+    width: 100%;
+    height: 0;
+    transition: .5s ease;
+    opacity: .6;
+    overflow: hidden;
+}
+
+.home-content:hover .overlay {
+    height: 100%;
+}
+
+.text {
+    white-space: nowrap;
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+/*Portrait responsive*/
+
+@media screen and (min-width: 320px) and (max-width: 359px) {
+    .home-content {
+        margin-top: 60%;
+    }
+
+    #image {
+        height: 150px;
+    }
+
+    #arrow {
+        width: 30px;
+        height: 30px;
+    }
+
+    .prev, .next {
+        top: 45%;
+        font-size: 40px;
+    }
+}
+
+@media screen and (min-width: 360px) and (max-width: 379px) {
+    .home-content {
+        margin-top: 60%;
+    }
+
+    #image {
+        height: 150px;
+    }
+
+    #arrow {
+        width: 30px;
+        height: 30px;
+    }
+
+    .prev, .next {
+        top: 45%;
+        font-size: 40px;
+    }
+}
+
+@media screen and (min-width: 380px) and (max-width: 479px) {
+    .home-content {
+        margin-top: 60%;
+    }
+
+    #image {
+        height: 150px;
+    }
+
+    #arrow {
+        width: 30px;
+        height: 30px;
+    }
+
+    .prev, .next {
+        top: 45%;
+        font-size: 40px;
+    }
+}
+
+@media screen and (min-width: 480px) and (max-width: 584px) {
+    .home-content {
+        margin-top: 40%;
+    }
+
+    #image {
+        height: 150px;
+    }
+
+    #arrow {
+        width: 30px;
+        height: 30px;
+    }
+
+    .prev, .next {
+        top: 45%;
+        font-size: 40px;
+    }
+}
+
+@media screen and (min-width: 585px) and (max-width: 767px) {
+    .home-content {
+        margin-top: 30%;
+    }
+
+    #image {
+        height: 150px;
+    }
+
+    #arrow {
+        width: 30px;
+        height: 30px;
+    }
+
+    .prev, .next {
+        top: 45%;
+        font-size: 40px;
+    }
+}
