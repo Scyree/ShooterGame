@@ -1,23 +1,47 @@
 ﻿table {
-    margin-top: 45px;
-    width: 100%;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    margin: 5% auto 0 auto;
+    width: 70%;
 }
 
 #highscore-table th, td {
     border: 1px solid white;
     text-align: center;
-    color: #ffffff;
 }
 
 .highscore-arrows {
-    color: red;
+    color: white;
     font-size: 37px;
 }
 
 #highscore-table-arrow-left {
     float: left;
+    margin-left: 15%;
 }
 
 #highscore-table-arrow-right {
     float: right;
+    margin-right: 15%;
+}
+
+#table-pages {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.pages:link {
+    color: yellow;
+}
+
+.pages:visited {
+    color: white;
+}
+
+.pages:hover {
+    color: lightblue
+}
+
+.pages:active {
+    color: aquamarine;
 }
