@@ -2,12 +2,15 @@
     ViewData["Title"] = "Home Page";
 }
 
-<script>
-    var home = document.getElementsByClassName('activeHome');
-    for (var i = 0; i < home.length; i++) {
-        home[i].style.textDecoration = "underline";
-    }
-</script>
+@section Scripts{
+    <script>
+        var home = document.getElementsByClassName('activeHome');
+        for (var i = 0; i < home.length; i++) {
+            home[i].style.backgroundColor = "white";
+            home[i].style.color = "#3d3d3d";
+        }
+    </script>
+}
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
     <ol class="carousel-indicators">

@@ -4,11 +4,14 @@
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
-<script>
-    var about = document.getElementsByClassName('activeAbout');
-    for (var i = 0; i < about.length; i++) {
-        about[i].style.textDecoration = "underline";
-    }
-</script>
+@section Scripts{
+    <script>
+        var about = document.getElementsByClassName('activeAbout');
+        for (var i = 0; i < about.length; i++) {
+            about[i].style.backgroundColor = "white";
+            about[i].style.color = "#3d3d3d";
+        }
+    </script>
+}
 
 <p>Use this area to provide additional information.</p>
