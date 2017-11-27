@@ -1,43 +1,19 @@
-﻿//Display the contents of each button
+﻿var slideIndex = 1;
+var slides = document.getElementsByClassName("slides");
+var i;
 
-function toggle_visibility(id) {
+//for (i = 0; i < slides.length; i++) {
+ //   slides[i].style.display = "none";
+//}
 
-    var currentContent = document.getElementById(id);
-
-    if (currentContent.style.display == 'block') {
-        currentContent.style.display = 'none';
-    }
-    else {
-        currentContent.style.display = 'block';
-    }
-
-}
-
-//Displaying the slides
-
-var slideIndex = 1;
-showSlides(slideIndex);
-
-function plusSlides(n) {
-    showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-    showSlides(slideIndex = n);
+function plusSlides(value) {
+    showSlides(slideIndex += value);
 }
 
 function showSlides(n) {
-    var i;
-    var slides = document.getElementsByClassName("slides");
-    var dots = document.getElementsByClassName("dot");
+    
     if (n > slides.length) { slideIndex = 1 }
     if (n < 1) { slideIndex = slides.length }
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
+    
     slides[slideIndex - 1].style.display = "block";
-    dots[slideIndex - 1].className += " active";
 }
