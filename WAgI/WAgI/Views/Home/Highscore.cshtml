@@ -6,6 +6,13 @@
     <link href="@Url.Content("~/css/highscore.css")" rel="stylesheet" type="text/css" />
 }
 
+<script>
+    var highScore = document.getElementsByClassName('activeHighScore');
+    for (var i = 0; i < highScore.length; i++) {
+        highScore[i].style.textDecoration = "underline";
+    }
+</script>
+
 <div>
     <table id="highscore-table">
         <tr>
