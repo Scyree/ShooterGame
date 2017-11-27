@@ -4,4 +4,11 @@
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
+<script>
+    var about = document.getElementsByClassName('activeAbout');
+    for (var i = 0; i < about.length; i++) {
+        about[i].style.textDecoration = "underline";
+    }
+</script>
+
 <p>Use this area to provide additional information.</p>
