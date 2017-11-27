@@ -28,10 +28,10 @@
     font-family: "Verdana"
 }
 
-    .navBar a:hover {
-        -webkit-transition: 300ms ease;
-        color: rgb(166, 170, 166);
-    }
+.navBar a:hover {
+	-webkit-transition: 300ms ease;
+	color: rgb(166, 170, 166);
+}
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */

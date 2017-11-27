@@ -1,0 +1,22 @@
+﻿table {
+    margin-top: 45px;
+    width: 100%;
+}
+
+#highscore-table th, td {
+    border: 1px solid black;
+    text-align: center;
+}
+
+.highscore-arrows {
+    color: red;
+    font-size: 37px;
+}
+
+#highscore-table-arrow-left {
+    float: left;
+}
+
+#highscore-table-arrow-right {
+    float: right;
+}
