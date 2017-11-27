@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Play";
+}
+@section Scripts{
+<script>
+    var play = document.getElementsByClassName('activePlay');
+    for (var i = 0; i < play.length; i++) {
+        play[i].style.backgroundColor = "white";
+        play[i].style.color = "#3d3d3d";
+    }
+</script>
+}
+
+@section Styles{
+<environment include="Development">
+    <link rel="stylesheet" href="~/css/play.css" />
+</environment>
+}
+
+<div class="content">
+
+    <div class="play-content">
+       
+    </div>
+</div>
