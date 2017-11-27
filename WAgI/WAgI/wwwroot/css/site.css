@@ -32,7 +32,7 @@
     font-size: 18px;
     margin: 20px;
     text-decoration: none;
-    color: #efefef;
+    color: #FFFFFF;
     font-family: "Verdana"
 }
 
@@ -55,5 +55,214 @@
     /* Hide captions */
     .carousel-caption {
         display: none;
+    }
+}
+
+/*Portrait responsive*/
+
+@media screen and (min-width: 320px) and (max-width: 359px) {
+
+    .navBar a {
+        margin: 11px;
+        padding: 1px 10px 1px 10px;
+        display: inline-block;
+    }
+    .home-content {
+        margin-top: 60%;       
+    }
+
+    #image {
+        height: 150px;
+    }
+
+    #arrow {
+        width: 30px;
+        height: 30px;
+    }
+
+    .prev, .next {
+        top: 45%;
+        font-size: 40px;
+    }
+
+}
+
+@media screen and (min-width: 360px) and (max-width: 379px) {
+
+    .navBar a {
+        margin: 11px;
+        padding: 1px 10px 1px 10px;
+        display: inline-block;
+    }
+    .home-content {
+        margin-top: 60%;       
+    }
+
+    #image {
+        height: 150px;
+    }
+
+    #arrow {
+        width: 30px;
+        height: 30px;
+    }
+
+    .prev, .next {
+        top: 45%;
+        font-size: 40px;
+    }
+}
+
+@media screen and (min-width: 380px) and (max-width: 479px) {
+    .navBar a {
+        margin: 11px;
+        padding: 1px 10px 1px 10px;
+        display: inline-block;
+    }
+
+    .home-content {
+        margin-top: 60%;
+    }
+
+    #image {
+        height: 150px;
+    }
+
+    #arrow {
+        width: 30px;
+        height: 30px;
+    }
+
+    .prev, .next {
+        top: 45%;
+        font-size: 40px;
+    }
+}
+
+@media screen and (min-width: 480px) and (max-width: 584px) {
+
+    .navBar a {
+        margin: 11px;
+        padding: 1px 10px 1px 10px;
+        display: inline-block;
+    }
+
+    .home-content {
+        margin-top: 40%;
+    }
+
+    #image {
+        height: 150px;
+    }
+
+    #arrow {
+        width: 30px;
+        height: 30px;
+    }
+
+    .prev, .next {
+        top: 45%;
+        font-size: 40px;
+    }
+}
+
+@media screen and (min-width: 585px) and (max-width: 767px) {
+
+    .navBar a {
+        margin: 11px;
+        padding: 1px 10px 1px 10px;
+        display: inline-block;
+    }
+
+    .home-content {
+        margin-top: 30%;
+    }
+
+    #image {
+        height: 150px;
+    }
+
+    #arrow {
+        width: 30px;
+        height: 30px;
+    }
+
+    .prev, .next {
+        top: 45%;
+        font-size: 40px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 794px) {
+
+    .highscore form {
+        width: 80%;
+    }
+
+        .highscore form input {
+            width: 60%;
+        }
+
+    button {
+        width: 30%;
+    }
+
+    .imgcontainer img {
+        width: 20%;
+    }
+}
+
+@media screen and (min-width: 801px) and (max-width: 868px) {
+
+    .highscore form {
+        width: 80%;
+    }
+
+        .highscore form input {
+            width: 50%;
+        }
+
+    button {
+        width: 30%;
+    }
+
+    .imgcontainer img {
+        width: 20%;
+    }
+}
+
+
+
+
+/*Landscape responsive*/
+@media screen and (min-width: 585px) and (max-width: 618px) {
+    .navBar a {
+        padding: 14px 5px;
+    }
+}
+
+@media screen and (min-width: 619px) and (max-width: 767px) {
+    .navBar a {
+        padding: 14px 10px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 867px) {
+    .navBar a {
+        padding: 14px 15px;
+    }
+}
+
+
+@media screen and (min-width: 868px) and (max-width: 1023px) {
+    .navBar a {
+        padding: 14px 20px;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1900px) {
+    .navBar a {
+        padding: 14px 30px;
+
     }
 }
