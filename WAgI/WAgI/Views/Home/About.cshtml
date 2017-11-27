@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "About";
+}
+
+@section Styles{
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/about.css" />
+        <script src="~/js/ShowText.js"></script>
+    </environment>
+}
+
+<div class="data-conatiner">
+    <div class="news-container">
+
+        <div id="cf1" class="images">
+            <img class="bottom" onclick="show('comment')" src="/images/ProjectName.png"/>
+            <img class="top" onclick="show('comment')" src="/images/ProjectCover.png"/>
+        </div>
+
+    </div>
+    <div id="s" class="news-container">
+        <div id="cf2" class="images">
+            <img class="bottom" onclick="show('teanComment')" src="/images/Us2.png"/>
+            <img class="top" onclick="show('teanComment')" src="/images/TeamCover.png"/>
+        </div>
+
+    </div>
+
+    <div class="Content">
+        
+        <div id="defaultComent"  class="TextZone">
+            <p>Click </p>
+        </div>
+
+        <div id="comment" class="TextZone" style="display:none" class="a">
+            <p>
+                We are against ignorance este un joc educativ de tip shooter ce va putea fi jucat direct
+                în cadrul navigatorului Web. Entităţile care vor fi "anihilate"
+                (fiecare "ţintă" valorând un anumit număr de puncte sau declanşând un eveniment
+                specific de genul "notifică atunci când apar răspunsuri pertinente")
+                vor putea fi întrebări "dificile" plasate pe situri de profil precum StackExchange
+                (Stack Overflow). Scorul acumulat în urma cumulării voturilor pozitive acordate
+                de alte persoane va putea fi salvat local şi partajat pe o reţea socială.
+                Bonus: starea curentă a jocului va fi reprezentată grafic recurgând la diverse maniere de
+                vizualizare a datelor. Bonus: redarea stării jocului în format vectorial cu SVG şi/sau 3D
+                (recurgând la WebGL). Bonus 2: folosirea realităţii îmbogăţite (augmented reality) pe baza
+                specificaţiei WebVR.
+            </p>
+        </div>
+        <div id="teanComment"  class="TextZone" style="display:none">
+            <p>Cu o experienta de lucru in echipa de peste 2 ani de zile, fiind acum la al 3-lea proiect de mare 
+                anvergura aceasta echipa isi propune din nou realizarea imposibilului(Sa cada de acord pe culori).<br>
+                Provocarea acum este jocul WaGI care va fi abordat ca si o continuare a platformerului "Web Village" - inca ne lansat
+                Ganduri cu care echipa porneste la drum: <br />
+                -Cimpoesu Razvan:"De data asta nu bem mai mult de 4 energizante pe zi"<br />
+                -Dorneanu Adrian:"Facem, cum nu> facem!"<br />
+                -Corfu Alexandru:"Hai sa nu mai facem iar in Java..."<br />
+                -Radu Vulpescu:"Hai sa terminam si noi treaba mai repede!"<br />
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+
+@section Scripts{
+    <script>
+        var about = document.getElementsByClassName('activeAbout');
+        for (var i = 0; i < about.length; i++) {
+            about[i].style.backgroundColor = "white";
+            about[i].style.color = "#3d3d3d";
+        }
+    </script>
+}
+

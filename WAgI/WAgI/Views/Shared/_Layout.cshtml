@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>@ViewData["Title"] - WAgI</title>
+    
+    @RenderSection("Styles", required: false)
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+
+</head>
+<body>
+    <nav class="navBar">
+        <a class="activeHome" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+        <a class="activePlay" asp-area="" asp-controller="Home" asp-action="Play">Play</a>
+        <a class="activeAbout" asp-area="" asp-controller="Home" asp-action="About">About</a>
+        <a class="activeContact" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+        <a class="activeHighScore" asp-area="" asp-controller="Home" asp-action="Highscore">Highscore</a>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    <environment include="Development">
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <!--<script src="~/js/activeLinks.js"></script>-->
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

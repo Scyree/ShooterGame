@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Highscore";
+}
+@section Styles{
+    <link href="@Url.Content("~/font-awesome-4.7.0/css/font-awesome.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/css/highscore.css")" rel="stylesheet" type="text/css" />
+}
+
+@section Scripts{
+    <script>
+        var highScore = document.getElementsByClassName('activeHighScore');
+        for (var i = 0; i < highScore.length; i++) {
+            highScore[i].style.backgroundColor = "white";
+            highScore[i].style.color = "#3d3d3d";
+
+        }
+    </script>
+}
+
+<div>
+    <table id="highscore-table">
+        <tr>
+            <th>Rank</th>
+            <th>Nickname</th>
+            <th>Score</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Smith</td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Jackson</td>
+            <td>90</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Jackson</td>
+            <td>80</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Jackson</td>
+            <td>70</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Jackson</td>
+            <td>60</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Jackson</td>
+            <td>50</td>
+        </tr>
+    </table>
+
+    <div id="table-pages">
+        <a href="#">
+            <i id="highscore-table-arrow-left" class="fa fa-arrow-left highscore-arrows" aria-hidden="true"></i>
+        </a>
+
+        <p style="display: inline; color: white;">
+            <a href="#" class="pages">1</a> <a href="#" class="pages">2</a> <a href="#" class="pages">3</a> ... <a href="#" class="pages">8</a>
+        </p>
+
+        <a href="#">
+            <i id="highscore-table-arrow-right" class="fa fa-arrow-right highscore-arrows" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
