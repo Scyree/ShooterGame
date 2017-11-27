@@ -2,24 +2,30 @@
     ViewData["Title"] = "Play";
 }
 @section Scripts{
-<script>
-    var play = document.getElementsByClassName('activePlay');
-    for (var i = 0; i < play.length; i++) {
-        play[i].style.backgroundColor = "white";
-        play[i].style.color = "#3d3d3d";
-    }
-</script>
+    <script>
+        var play = document.getElementsByClassName('activePlay');
+        for (var i = 0; i < play.length; i++) {
+            play[i].style.backgroundColor = "white";
+            play[i].style.color = "#3d3d3d";
+        }
+    </script>
 }
 
 @section Styles{
-<environment include="Development">
-    <link rel="stylesheet" href="~/css/play.css" />
-</environment>
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/play.css" />
+        <script src="~/js/mute.js"></script>
+    </environment>
 }
 
 <div class="content">
-
     <div class="play-content">
-       
+        <audio class="audio_button" autoplay id="bg_music">
+            <source src="~/audio/Newbie Melody (Old Music).mp3" type="audio/mp3"> Your browser does not support the audio tag.
+        </audio>
+
+        <div class="mute" onclick="document.getElementById('bg_music').muted = !document.getElementById('bg_music').muted">
+            <img alt="speaker_icon" id="aud" src="http://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/500px-Speaker_Icon.svg.png" onclick='toggleSound(this);'>
+        </div>
     </div>
 </div>

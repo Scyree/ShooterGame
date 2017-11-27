@@ -1,17 +1,43 @@
 ﻿@{
     ViewData["Title"] = "Contact";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+@section Scripts{
+    <script>
+    var contact = document.getElementsByClassName('activeContact');
+    for (var i = 0; i < contact.length; i++) {
+        contact[i].style.backgroundColor = "white";
+        contact[i].style.color = "#3d3d3d";
+    }
+    </script>
+}
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+@section Styles{
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/contact.css" />
+    </environment>
+}
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<div class="content">
+
+    <div class="contact-content">
+        <div class="glass">
+        </div>
+        <div class="text">
+            <p>
+                <strong>Adrese de contact:</strong>
+            </p>
+            <p>
+                <code><strong>Radu Vulpescu:</strong> radu.vulpescu16@gmail.com</code>
+            </p>
+            <p>
+                <code><strong>Razvan Cimpoesu:</strong> radu.!</code>
+            </p>
+            <p>
+                <code><strong>Adrian Dorneanu:</strong> radu.!</code>
+            </p>
+            <p>
+                <code><strong>Alexandru Corfu:</strong> corfu.alexandru01@gmail.com</code>
+            </p>
+        </div>
+    </div>
+</div>
