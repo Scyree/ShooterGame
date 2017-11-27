@@ -19,6 +19,7 @@
     height: 350px;
     width: 450px;
     margin: 0 auto;
+    cursor: pointer;
 }
 
     .images img {
