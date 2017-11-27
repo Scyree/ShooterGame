@@ -45,3 +45,68 @@
 .pages:active {
     color: aquamarine;
 }
+
+@media screen and (min-width: 320px) and (max-width: 359px) {
+
+    table {
+        margin-top: 35%;
+    }
+}
+
+@media screen and (min-width: 360px) and (max-width: 379px) {
+
+    table {
+        margin-top: 35%;
+    }
+}
+
+@media screen and (min-width: 380px) and (max-width: 479px) {
+    table {
+        margin-top: 35%;
+    }
+}
+
+@media screen and (min-width: 480px) and (max-width: 584px) {
+    table {
+        margin-top: 35%;
+    }
+}
+
+@media screen and (min-width: 585px) and (max-width: 767px) {
+    table {
+        margin-top: 35%;
+    }
+}
+
+
+/*Landscape responsive*/
+@media screen and (min-width: 585px) and (max-width: 618px) {
+    table {
+        margin-top: 35%;
+    }
+}
+
+@media screen and (min-width: 619px) and (max-width: 767px) {
+    table {
+        margin-top: 35%;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 867px) {
+    table {
+        margin-top: 35%;
+    }
+}
+
+
+@media screen and (min-width: 868px) and (max-width: 1023px) {
+    .navBar a {
+        padding: 14px 20px;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1900px) {
+    .navBar a {
+        padding: 14px 30px;
+    }
+}
