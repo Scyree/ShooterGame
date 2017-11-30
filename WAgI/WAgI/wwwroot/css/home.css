@@ -59,7 +59,7 @@
 }
 
 .prev:hover, .next:hover {
-    background-color: rgb(13, 28, 33);
+    background-color: #008b8b;
     opacity: .7;
 }
 

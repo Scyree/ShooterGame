@@ -2,6 +2,11 @@
 var slides = document.getElementsByClassName("slides");
 var i;
 
+slides[0].style.display = "block";
+for (i = 1; i < slides.length - 1; i++) {
+    slides[i].style.display = "none";
+}
+
 function plusSlides(value) {
     showSlides(slideIndex += value);
 }
