@@ -69,8 +69,11 @@
         </p>
     </div>
     <button type="button" onclick="saveScore()">Save score</button>
+    <button onclick="shareScore()">Share your score!</button>
+    <div id="fb-root"></div>
 </div>
 @section Scripts {
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
     <script type='text/javascript' src='https://api.stackexchange.com/js/2.0/all.js'></script>
     <script type="text/javascript">
         var jsonObject;
@@ -80,7 +83,8 @@
 
         function getDataFromStack() {
             var xhttp = new XMLHttpRequest();
-            var url = 'https://api.stackexchange.com/2.2/questions?order=desc&min=50&sort=votes&site=stackoverflow&filter=!-MH(KhGYaqaAAasg*y_lk4jwR)js3H_LP&key=RYr8RGC7N)4ZYWFkts)EnQ((';
+            var url =
+                'https://api.stackexchange.com/2.2/questions?order=desc&min=50&sort=votes&site=stackoverflow&filter=!-MH(KhGYaqaAAasg*y_lk4jwR)js3H_LP&key=RYr8RGC7N)4ZYWFkts)EnQ((';
 
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
@@ -203,13 +207,23 @@
             console.log("noul scor: " + score);
         }
 
-        function saveScore() {
-            window.location.href = "../Home";
-        }
+        function shareScore() {
+            FB.init({
+                appId: '379381419123532',
+                xfbml: true,
+                version: 'v2.11'
+            });
+            
+            FB.login(function() {
+                FB.api('/me/feed', 'post', {
+                    message: "My StackInvaders Score is: " + score + "!\nChallenge me at:",
+                    link: "https://github.com/Scyree/ShooterGame/blob/master/ShooterGame/Images/bg.png?raw=true"
+                });
+            }, { scope: 'publish_actions' });
+        };
 
         function exit() {
-            document.onkeydown = function (event) {
-                event = event || window.event;
+            document.onkeydown = function(event) {
                 if (event.keyCode == 27) {
                     if (confirm('Are you sure that you want to exit?')) {
                         saveScore();
@@ -218,7 +232,15 @@
             };
         }
 
-    </script>
+        function saveScore() {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("POST", "Home", true);
+            xmlHttp.send();
+
+            //window.location.href = "../Home";
+        }
+        
+   </script>
 
 
 }
