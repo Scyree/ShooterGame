@@ -32,6 +32,13 @@ namespace WAgI.Controllers
             return View();
         }
 
+        public IActionResult StackExchangeAPI()
+        {
+            ViewData["Message"] = "Your stackExchange page.";
+
+            return View();
+        }
+
         public IActionResult Play()
         {
             ViewData["Message"] = "Your play page.";
