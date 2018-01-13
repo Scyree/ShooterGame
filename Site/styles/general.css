@@ -1,0 +1,185 @@
+ body{
+    background-repeat: no-repeat center center fixed;
+    background-size: cover;
+    zoom: 100%;
+}
+
+.big-container{
+    position: relative;
+    align-content: center;
+    text-align: center;
+    color:white;
+    top:0px;
+    left: 0px;
+}
+.container{
+    position: relative;
+    text-align: center;
+    top:2rem; 
+}
+
+h5{
+    color:white;
+    margin-top:-1rem;
+    font-family: 'Acme', sans-serif;
+}
+
+.cnvs-container{
+    position:relative;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+.cnvs{
+    border:2px solid rgb(230,194,0);
+}
+.buttons{
+    margin-top:3rem;
+}
+.button{
+    background:transparent;
+    color: WHITE;
+    cursor: pointer;
+    border: 0px;
+    font-family: 'Acme', sans-serif;
+    font-size: 30px;    
+    font-weight: bold;
+    margin-bottom: 1rem;
+    width: 12rem;
+}
+.button:hover{
+    color:rgb(230,194,0);
+}
+.button:focus{
+   outline:none;    
+}
+#backButtonPlay{
+    position: relative;
+    top: 25rem;
+    width: 20rem;
+}
+
+/*game canvasses*/
+.cnvs{
+    position: absolute;
+}
+#background {
+    z-index: -2;
+}
+#main {
+    z-index: -1;
+}
+
+#ship {
+    z-index: 0;
+}
+
+/*About page */
+
+.description-text{  
+    margin-top: 4rem;
+    clear: both;
+    max-width: 50rem;
+    font-family:'Acme', sans-serif;
+    font-size: 25px;   
+}
+
+#about-page{
+    display: inline-block;
+    position: relative;
+    width: 50rem;
+}
+
+
+/*How to play*/
+
+.instructions-image{
+    float:left;
+    max-width:12rem;
+    max-height: 4rem;
+}
+
+#arrows{
+    position: relative;
+    left:3rem;
+}
+
+#space-bar{
+    margin-top:1.5rem;
+}
+
+.instructions-text{
+    display: inline-block;
+    position: relative;
+    left:2rem;
+
+}
+
+#how-to-play-page{
+    display: inline-block;
+    width: 30rem;
+}
+.info-box {
+   max-width: inherit;
+}
+
+#arrows-text{
+   margin-left: 7rem;
+}
+
+#back-button-how-to-play{
+    position: relative;
+    top: 7rem;
+    left:4rem;
+    width: 20rem;
+}
+
+/*Intro*/
+
+
+
+.dialog-box{
+    position: relative;
+    background-color: black;
+    border:2px solid white;
+    width: 45rem;
+    display:inline-block;
+    font-family:'Acme', sans-serif;
+}
+
+.dialog-box img{
+    float: left;
+    
+}
+
+#nickname-input:focus{
+    outline: none;
+}
+
+
+#intro-auxiliar-text{
+    position: relative;
+    font-size: 15px;
+    color:white;
+    opacity: 0.7;
+}
+
+.next-button{
+    
+    font-family: 'Acme', sans-serif;
+    font-size: 20px;
+    position: absolute;
+    top:8.5rem;
+    left:41.5rem;
+    color: white;
+    display: inline-block;
+    border:0px;
+    background-color: black;
+    outline:none;
+    cursor: pointer;
+}
+
+.next-button:hover{
+    color:rgb(230,194,0);
+}
