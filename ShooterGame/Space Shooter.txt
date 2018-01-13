@@ -1,8 +1,0 @@
-Prima parte:
- -creat un repository pentru imagini pentru a nu le incarca de fiecare data cand este nevoie
- -creat obiectul Drawable care va fi mostenit de toate obiectele care necesita a fi desenate
- -creat obiectul Background care mosteneste obiectul Drawable. "Desenat" background cu tot cu animatie
- -creat obiectul Game. Verific daca Canvasul este suportat de browser si returnez true sau false. Daca e suportat, obiectul Game
-  seteaza informatii despre Canvas obiectului Background. Asa dar, obiectul Background stie ce canvas sa foloseasca si ce dimensiune.
-
-Partea a doua:

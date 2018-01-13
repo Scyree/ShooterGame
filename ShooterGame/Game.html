@@ -1,16 +1,20 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Space Shooter</title>
-		<meta charset="UTF-8">
-
 		<link rel="stylesheet" type="text/css" href="Css/Canvas.css">
 	</head>
-    
-    <body onload="init()">
+	<body>
 		<!-- The canvas for the panning background -->
 		<canvas id="background" width="600" height="360">
 			Your browser does not support canvas. Please try again with a different browser.
+		</canvas>
+		<!-- The canvas for all enemy ships and bullets -->
+		<canvas id="main" width="600" height="360">
+		</canvas>
+		<!-- The canvas the ship uses (can only move up
+         one forth the screen.) -->
+		<canvas id="ship" width="600" height="360">
 		</canvas>
 
 		<script src="Javascripts/SpaceShooter.js"></script>
