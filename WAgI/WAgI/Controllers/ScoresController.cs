@@ -17,10 +17,38 @@ namespace WAgI.Controllers
             _context = context;
         }
 
-        // GET: Scores
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Scores.OrderBy(score => score.Value).ToListAsync());
+            return View();
+        }
+
+        // GET: Scores
+        [Route("Scores/Highscore/{pageNumber}")]
+        public async Task<IActionResult> Highscore(int pageNumber)
+        {
+            TempData["pageIndex"] = pageNumber;
+            var scoresCount = _context.Scores.Count();
+
+            if (pageNumber < 1 || (pageNumber - 1) * 10 > scoresCount)
+            {
+                return Redirect("1");
+            }
+
+            if (scoresCount % 10 == 0)
+            {
+                TempData["lastPageNumber"] = scoresCount / 10;
+            }
+            else
+            {
+                TempData["lastPageNumber"] = scoresCount / 10 + 1;
+            }
+            
+            return View(await _context.Scores
+                .OrderBy(score => score.Value)
+                .Skip((pageNumber - 1) * 10)
+                .Take(10)
+                .ToListAsync()
+            );
         }
 
         // POST: Scores/Create

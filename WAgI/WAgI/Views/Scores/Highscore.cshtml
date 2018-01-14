@@ -1,0 +1,78 @@
+﻿@model IEnumerable<WAgI.Entities.Score>
+
+@{
+    var pageIndex = (int)TempData["pageIndex"];
+    var lastPageNumber = (int)TempData["lastPageNumber"];
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>title</h2>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            Rank
+        </th>
+        <th>
+            Nickname
+        </th>
+        <th>
+            Score
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @{
+        var i = (pageIndex - 1) * 10 + 1;
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @i
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nickname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value)
+                </td>
+            </tr>
+
+            ++i;
+        }
+    }
+    </tbody>
+</table>
+
+@{
+    var j = 1;
+
+    for (; j <= 3 && 3 <= lastPageNumber; ++j)
+    {
+        <a href="/Scores/Highscore/@j">@j</a>
+    }
+
+    if (pageIndex == 3 && lastPageNumber > 3)
+    {
+        <a href="/Scores/Highscore/4">4</a>
+    }
+    else if (pageIndex == 4 && lastPageNumber > 4)
+    {
+        <a href="/Scores/Highscore/5">5</a>
+    }
+    else if (pageIndex > 4)
+    {
+        var c1 = pageIndex - 1;
+        var c2 = pageIndex;
+        var c3 = pageIndex + 1;
+        <a href="/Scores/Highscore/@c1">@c1</a> <a href="/Scores/Highscore/@c2">@c2</a> <a href="/Scores/Highscore/@c3">@c3</a>
+    }
+
+    if (j <= lastPageNumber && pageIndex != lastPageNumber && pageIndex != lastPageNumber - 1)
+    {
+        <a href="/Scores/Highscore/@lastPageNumber">@lastPageNumber</a>
+    }
+}
