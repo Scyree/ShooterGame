@@ -9,69 +9,76 @@
 
 <h2>title</h2>
 
-
 <table class="table">
     <thead>
-    <tr>
-        <th>
-            Rank
-        </th>
-        <th>
-            Nickname
-        </th>
-        <th>
-            Score
-        </th>
-    </tr>
+        <tr>
+            <th>
+                Rank
+            </th>
+            <th>
+                Nickname
+            </th>
+            <th>
+                Score
+            </th>
+        </tr>
     </thead>
     <tbody>
-    @{
-        var i = (pageIndex - 1) * 10 + 1;
-        foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @i
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nickname)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Value)
-                </td>
-            </tr>
+        @{
+            var i = (pageIndex - 1) * 10 + 1;
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @i
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nickname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value)
+                    </td>
+                </tr>
 
-            ++i;
+                ++i;
+            }
         }
-    }
     </tbody>
 </table>
 
 @{
-    var j = 1;
+    var i1 = pageIndex - 1;
+    var i2 = pageIndex;
+    var i3 = pageIndex + 1;
 
-    for (; j <= 3 && 3 <= lastPageNumber; ++j)
+    if (i1 != 1 && pageIndex != 1)
     {
-        <a href="/Scores/Highscore/@j">@j</a>
-    }
-
-    if (pageIndex == 3 && lastPageNumber > 3)
-    {
-        <a href="/Scores/Highscore/4">4</a>
-    }
-    else if (pageIndex == 4 && lastPageNumber > 4)
-    {
-        <a href="/Scores/Highscore/5">5</a>
-    }
-    else if (pageIndex > 4)
-    {
-        var c1 = pageIndex - 1;
-        var c2 = pageIndex;
-        var c3 = pageIndex + 1;
-        <a href="/Scores/Highscore/@c1">@c1</a> <a href="/Scores/Highscore/@c2">@c2</a> <a href="/Scores/Highscore/@c3">@c3</a>
+        <a href="/Scores/Highscore/1">1</a>
     }
 
-    if (j <= lastPageNumber && pageIndex != lastPageNumber && pageIndex != lastPageNumber - 1)
+    if (i2 > 3)
+    {
+        <text>...</text>
+    }
+
+    if (i1 > 0)
+    {
+        <a href="/Scores/Highscore/@i1">@i1</a>
+    }
+
+    <a href="/Scores/Highscore/@i2">@i2</a>
+
+    if (pageIndex != lastPageNumber)
+    {
+        <a href="/Scores/Highscore/@i3">@i3</a>
+    }
+
+    if (i3 < lastPageNumber - 1)
+    {
+        <text>...</text>
+    }
+
+    if (pageIndex != lastPageNumber && i3 != lastPageNumber)
     {
         <a href="/Scores/Highscore/@lastPageNumber">@lastPageNumber</a>
     }
