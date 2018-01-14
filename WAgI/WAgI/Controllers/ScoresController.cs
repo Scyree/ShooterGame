@@ -23,14 +23,21 @@ namespace WAgI.Controllers
             return View(await _context.Scores.OrderBy(score => score.Value).ToListAsync());
         }
 
+        public IActionResult StackOverflowApi()
+        {
+            return View();
+        }
+
         // POST: Scores/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task Create(string nickname, int value)
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(string nickname, int value)
         {
             _context.Add(Score.CreateScore(nickname, value));
 
             await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: Scores/Delete/5

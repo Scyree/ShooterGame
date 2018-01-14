@@ -12,6 +12,11 @@
     background-size: cover;
 }
 
+table {
+    background-color: black; 
+    color: white;
+}
+
 /*
     Navigation Bar
 */
