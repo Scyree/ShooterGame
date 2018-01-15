@@ -4,8 +4,9 @@ getDataFromStack();
 exit();
 
 function modifyValues() {
+    var nicknameValue = localStorage.getItem(nicknameValue);
     document.getElementById("value").value = score;
-    document.getElementById("nickname").value = "MERGEE";
+    document.getElementById("nickname").value = nicknameValue;
 }
 
 function getDataFromStack() {
