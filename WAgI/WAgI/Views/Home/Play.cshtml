@@ -1,31 +1,34 @@
-﻿@{
-    ViewData["Title"] = "Play";
-}
-@section Scripts{
+<environment include="Development">
+    <script src="../Javascripts/SpaceShooter.js"></script>
+    <link rel="stylesheet" type="text/css" href="../styles/general.css" />
+    <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+</environment>    
+
+<div class="container">
+        <img src="../images/logo.png">
+        <h5>In a galaxy far far away ...a fuck.. was given..by Darth Vader</h5>
+      <div class="cnvs-container">
+            <canvas class="cnvs" id="background" width="600" height="360">
+                    Your browser does not support canvas. Please try again with a different browser.
+             </canvas>
+            
+            <canvas class="cnvs" id="main" width="600" height="360"></canvas>
+            <canvas class="cnvs" id="ship" width="600" height="360"></canvas>
+      </div>
+		 
+        <div  class="buttons">   
+                <div class="button-container"> 
+                    <a asp-action="Index">
+                     <input id="backButtonPlay"  class="button" type="button" value="BACK  TO  MAIN  MENU">
+                   </a>    
+                </div>     
+        </div>        
+</div>
+
+@section Scripts {
     <script>
-        var play = document.getElementsByClassName('activePlay');
-        for (var i = 0; i < play.length; i++) {
-            play[i].style.backgroundColor = "white";
-            play[i].style.color = "#3d3d3d";
+        window.onload = function () {
+            init();
         }
     </script>
 }
-
-@section Styles{
-    <environment include="Development">
-        <link rel="stylesheet" href="~/css/play.css" />
-        <script src="~/js/mute.js"></script>
-    </environment>
-}
-
-<div class="content">
-    <div class="play-content">
-        <audio class="audio_button" autoplay id="bg_music">
-            <source src="~/audio/Newbie Melody (Old Music).mp3" type="audio/mp3"> Your browser does not support the audio tag.
-        </audio>
-
-        <div class="mute" onclick="document.getElementById('bg_music').muted = !document.getElementById('bg_music').muted">
-            <img alt="speaker_icon" id="aud" src="http://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/500px-Speaker_Icon.svg.png" onclick='toggleSound(this);'>
-        </div>
-    </div>
-</div>

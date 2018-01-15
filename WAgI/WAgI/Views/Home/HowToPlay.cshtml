@@ -1,0 +1,50 @@
+
+<environment include="Development">
+    <script src="../Javascripts/SpaceShooterHowToPlay.js" asp-append-version="true"></script>
+    <link rel="stylesheet" type="text/css" href="../styles/general.css" />
+    <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+</environment>
+
+<div class="big-container">    
+    <div id="how-to-play-page" class="container">
+            <img src="../images/logo.png">
+            <h5>In a galaxy far far away ...a fuck.. was given..by Darth Vader</h5>
+            <div  class="description-text">
+                <div clss="info-box">
+                        <img id="arrows" class="instructions-image" src="../images/arrows.png">
+                        <div id="arrows-text" class="instructions-text">
+                            <p>Use arrow keys to move </p>
+                        </div>
+
+                </div>
+                <div clss="info-box">
+                    <img id="space-bar" class="instructions-image" src="../images/spaceBar.png">
+                    <div class="instructions-text">
+                            <p>Use space bar to shoot</p>
+                    </div>
+                </div>
+                <div class="cnvs-container">
+                        <canvas class="cnvs" id="background" width="600" height="150">
+                                Your browser does not support canvas. Please try again with a different browser.
+                            </canvas>
+                                
+                        <canvas class="cnvs" id="main" width="600" height="150"></canvas>
+                        <canvas class="cnvs" id="ship" width="600" height="150"></canvas>
+                    </div>
+            </div>
+                
+            <div id="back-button-how-to-play" class="buttons">
+                <a asp-action="Index">
+                    <input class="button" type="button" value="BACK">
+                </a>    
+            </div>        
+    </div>
+</div>    
+
+@section Scripts {
+    <script>
+        window.onload = function () {
+            init();
+        }
+    </script>
+}

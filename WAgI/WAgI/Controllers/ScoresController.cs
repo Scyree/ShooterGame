@@ -22,6 +22,31 @@ namespace WAgI.Controllers
             return View();
         }
 
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult HowToPlay()
+        {
+            return View();
+        }
+
+        public IActionResult Intro()
+        {
+            return View();
+        }
+
+        public IActionResult Intro2()
+        {
+            return View();
+        }
+
+        public IActionResult Play()
+        {
+            return View();
+        }
+
         public IActionResult StackOverflowApi()
         {
             return View();

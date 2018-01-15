@@ -1,0 +1,26 @@
+<environment include="Development">
+    <link rel="stylesheet" type="text/css" href="../styles/general.css" />
+    <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+    <script src="../Javascripts/Utility.js" asp-append-version="true"></script>
+</environment>
+
+<div class="container">
+        <img src="../images/logo.png">
+        <h5>In a galaxy far far away ...a fuck.. was given..by Darth Vader</h5>
+        
+<div class="big-container">
+        
+        <div class="container">
+           <div class="dialog-box">
+                <img src="../images/HanSolo.png">
+                    <p>Hy, I'm Han, Han Solo and I need copilot for my ship to help me rescu my wife Laya and destroy the Sith once and for all<br/>
+                  But First, id like to know your name.</p>
+                <form id="inserNickname" asp-action="Intro2">
+                    <input id="nickname-input" type="text" required autofocus> <br/>   
+                    <input class="next-button" onclick="setName()" value="next">
+                </form> 
+                <p id="intro-auxiliar-text">(Enter your nickname in the box above)</p>
+           </div>
+        </div>       
+    </div>        
+</div>

@@ -1,0 +1,100 @@
+﻿@model IEnumerable<WAgI.Entities.Score>
+
+@{
+    ViewData["Title"] = "StackOverflowApi";
+}
+
+<environment include="Development">
+    <link rel="stylesheet" type="text/css" href="../styles/general.css" />
+    <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+    <script src="../Javascripts/StackApi.js" asp-append-version="true"></script>
+    <script src="http://connect.facebook.net/en_US/all.js" asp-append-version="true"></script>
+    <script src="https://api.stackexchange.com/js/2.0/all.js" asp-append-version="true"></script>
+</environment>
+
+<style>
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    .text {
+        background-color: #333;
+        width: 100%;
+        height: inherit;
+        overflow: hidden;
+        color: white;
+    }
+
+    #answer1 {
+        background-color: #1f1414;
+        height: 80px;
+        overflow: scroll;
+        padding: 10px;
+        border: 5px solid #1a0000;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    #answer2 {
+        background-color: #1f1414;
+        height: 80px;
+        overflow: scroll;
+        padding: 10px;
+        border: 5px solid #1a0000;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    #answer3 {
+        background-color: #1f1414;
+        height: 80px;
+        overflow: scroll;
+        padding: 10px;
+        border: 5px solid #1a0000;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    #question {
+        background-color: #4d4d4d;
+        height: 200px;
+        overflow: scroll;
+        padding: 10px;
+        border: 5px solid #1a0000;
+        border-radius: 10px;
+    }
+
+    #Context {
+        width: 50%;
+        height: 640px;
+        margin-left: 25%;
+    }
+</style>
+
+<div id="Context">
+    <button type="button" onclick="getContent()">Get question</button>
+    <div class="text">
+        <p id="question">
+        </p>
+        <p onclick="getScore(this.value)" id="answer1">
+        </p>
+        <p onclick="getScore(this.value)" id="answer2">
+        </p>
+        <p onclick="getScore(this.value)" id="answer3">
+        </p>
+    </div>
+
+    <form id="insertValues" action="Create">
+        <input id="nickname" type="hidden" name="nickname">
+        <input id="value" type="hidden" name="value">
+        <button onclick="saveScore()">Save</button>
+    </form>
+    <button onclick="shareScore()">Share your score!</button>
+</div>
+
+@section Scripts {
+    <script>
+        
+        
+    </script>
+}

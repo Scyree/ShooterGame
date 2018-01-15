@@ -1,72 +1,100 @@
-﻿@{
-    ViewData["Title"] = "Highscore";
-}
-@section Styles{
-    <link href="@Url.Content("~/font-awesome-4.7.0/css/font-awesome.min.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/css/highscore.css")" rel="stylesheet" type="text/css" />
+﻿@model IEnumerable<WAgI.Entities.Score>
+
+@{
+    var pageIndex = (int)TempData["pageIndex"];
+    var lastPageNumber = (int)TempData["lastPageNumber"];
+    ViewBag.Title = "title";
+    Layout = "_Layout";
 }
 
-@section Scripts{
-    <script>
-        var highScore = document.getElementsByClassName('activeHighScore');
-        for (var i = 0; i < highScore.length; i++) {
-            highScore[i].style.backgroundColor = "white";
-            highScore[i].style.color = "#3d3d3d";
+<environment include="Development">
+    <link rel="stylesheet" type="text/css" href="../../styles/general.css" />
+    <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+</environment>
 
+<div class="container">
+    <img src="../../images/logo.png">
+    <h5>In a galaxy far far away ...a fuck.. was given..by Darth Vader</h5>
+    
+    <table class="table" style="background-color: black; color: white;">
+        <thead>
+        <tr>
+            <th>
+                Rank
+            </th>
+            <th>
+                Nickname
+            </th>
+            <th>
+                Score
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @{
+            var i = (pageIndex - 1) * 10 + 1;
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @i
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nickname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value)
+                    </td>
+                </tr>
+
+                ++i;
+            }
         }
-    </script>
-}
-
-<div>
-    <table id="highscore-table">
-        <tr>
-            <th>Rank</th>
-            <th>Nickname</th>
-            <th>Score</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Smith</td>
-            <td>100</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Jackson</td>
-            <td>90</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Jackson</td>
-            <td>80</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Jackson</td>
-            <td>70</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Jackson</td>
-            <td>60</td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>Jackson</td>
-            <td>50</td>
-        </tr>
+        </tbody>
     </table>
 
-    <div id="table-pages">
-        <a href="#">
-            <i id="highscore-table-arrow-left" class="fa fa-arrow-left highscore-arrows" aria-hidden="true"></i>
-        </a>
+    @{
+        var i1 = pageIndex - 1;
+        var i2 = pageIndex;
+        var i3 = pageIndex + 1;
 
-        <p style="display: inline; color: white;">
-            <a href="#" class="pages">1</a> <a href="#" class="pages">2</a> <a href="#" class="pages">3</a> ... <a href="#" class="pages">8</a>
-        </p>
+        if (i1 != 1 && pageIndex != 1)
+        {
+            <a asp-action="Highscore" asp-route-id="1">1</a>
+        }
 
-        <a href="#">
-            <i id="highscore-table-arrow-right" class="fa fa-arrow-right highscore-arrows" aria-hidden="true"></i>
-        </a>
-    </div>
+        if (i2 > 3)
+        {
+            <text>...</text>
+        }
+
+        if (i1 > 0)
+        {
+            <a asp-action="Highscore" asp-route-id="@i1">@i1</a>
+        }
+
+        <a asp-action="Highscore" asp-route-id="@i2">@i2</a>
+
+        if (pageIndex != lastPageNumber)
+        {
+            <a asp-action="Highscore" asp-route-id="@i3">@i3</a>
+        }
+
+        if (i3 < lastPageNumber - 1)
+        {
+            <text>...</text>
+        }
+
+        if (pageIndex != lastPageNumber && i3 != lastPageNumber)
+        {
+            <a asp-action="Highscore" asp-route-id="@lastPageNumber">@lastPageNumber</a>
+        }
+    }
+    <div class="buttons">   
+        <div class="button-container"> 
+            <a asp-action="Index">
+                <input class="button" type="button" value="Back">
+            </a>    
+        </div>     
+    </div>        
 </div>
