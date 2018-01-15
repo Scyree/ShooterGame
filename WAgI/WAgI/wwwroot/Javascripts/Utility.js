@@ -6,5 +6,5 @@
 
 function greetPlayer() {
     var nicknameValue = localStorage.getItem(nicknameValue);
-    document.getElementById("greetings").innerHTML = "Glad to meet you ( " + nicknameValue + " ), Let's save the world!";
+    document.getElementById("greetings").innerHTML = "Glad to meet you " + nicknameValue + ", Let's save the world!";
 }

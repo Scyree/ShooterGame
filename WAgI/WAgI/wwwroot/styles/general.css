@@ -166,7 +166,7 @@ h5{
 }
 
 .next-button{
-    
+    max-width: 3rem;
     font-family: 'Acme', sans-serif;
     font-size: 20px;
     position: absolute;
