@@ -22,6 +22,11 @@ namespace WAgI.Controllers
             return View();
         }
 
+        public IActionResult StackOverflowApi()
+        {
+            return View();
+        }
+
         // GET: Scores
         [Route("Scores/Highscore/{pageNumber}")]
         public async Task<IActionResult> Highscore(int pageNumber)
@@ -52,13 +57,13 @@ namespace WAgI.Controllers
         }
 
         // POST: Scores/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task Create(string nickname, int value)
+        public async Task<IActionResult> Create(string nickname, int value)
         {
             _context.Add(Score.CreateScore(nickname, value));
 
             await _context.SaveChangesAsync();
+
+            return View("Index");
         }
 
         // POST: Scores/Delete/5
