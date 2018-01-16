@@ -189,20 +189,21 @@ h5{
 }
 
 .startBoxDiv {
-    margin-top: 100px;
-    left: 210px;
-    color: #FF7F00;
-    font-family: Helvetica, sans-serif;
+    z-index: 3;
+    position: relative;
+    top: 7rem;
+    left: 0.5rem;
+    color: white;
+    font-family: 'Acme', sans-serif;
     font-size: 30px;
-    cursor: default;
 }
 
-    .startBoxDiv span {
-        position: relative;
-        font-size: 20px;
-        cursor: pointer;
-    }
+.startBoxDiv span {
+   position: relative;
+   font-size: 60px;
+   cursor: pointer;
+}
 
-        .startBoxDiv span:hover {
-            color: #FFD700;
-        }
+    .startBoxDiv span:hover {
+        color: rgb(230,194,0);
+    }

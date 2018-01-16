@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Space Invaders - Scholarly Report</title>
+    <link rel="stylesheet" href="css/scholarly.min.css">
+    <script src="js/scholarly.min.js"></script>
+  </head>
+  <body prefix="schema: http://schema.org">
+    <header>
+      <h1>Space Invaders</h1>
+    </header>
+	
+    <div role="contentinfo">
+	  <dt>Authors</dt>
+	  <dd>
+	    Vulpescu Radu-Cristian
+	    &amp;
+	    Cimpoe&#537;u R&#259;zvan-Adrian
+		&amp;
+	    Corfu Alexandru
+		&amp;
+	    Dorneanu Adrian
+	  </dd>
+    </div>
+	
+    <section typeof="sa:Abstract" id="abstract" role="doc-abstract">
+      <h2>Abstract</h2>
+	  
+      <p>
+        This shooter game dares to combine the competitive spirit given by arcade games
+		with the possibility of learning new things! In other words, having the chance
+		to compete based on general culture.
+      </p>
+    </section>
+	
+    <section id="introduction" role="doc-introduction">
+      <h2>Introduction</h2>
+      <p>
+        StackInvaders (or based on the initial name: WAgI) is an arcade-shooter themed game
+		with an unique aim: players are competing based on different questions from StackOverflow's site!
+		By this, if the player has enough knowledge about the vast domain of IT, he'll be able to prove
+		himself by solving these questions and climbing the leaderboards!
+      </p> 
+		<div class="initialImage">
+		  <img src="images/firstImage.png" width="800" height="400" alt="firstImage">
+		</div>
+    </section>
+	
+    <section id="structure">
+      <h2>Structure</h2>
+	  
+      <p>
+        Client-side: a client/user on our website will be able to use the following:
+		<ul>
+            <li>Play: here, he'll be asked to insert his nickname and be introduced in our game's theme.
+            Here, after every defeated waves, a boss will be spawned and he'll need to answer different questions in order to truly defeat it.</li>
+            <li>About: a short history that will introduce our user to the game's theme</li>
+            <li>HowToPlay: a page dedicated to learning basic movements/actions for player</li>
+            <li>Highscore: here, the users will be able to see how high are they placed</li>
+		</ul>
+		And by using:
+		<ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+		</ul>
+      </p>
+	  <p>Server-side:</p>
+      <section id="arhitecture">
+        <h3>Arhitecture</h3>
+		
+        <p>
+          Based on our needs and past experiences, we went for a MVC type of application, being programmed in C# language,
+		  using ASP .NET CORE 2.0.
+        </p>
+		
+        <p>
+          The simple logic behind this type of arhitecture and our application is: the user will interact directly with the Views and
+		  based on his requests, where are parsed at controller which will change/adapt to them and send this notification back
+		  to Views and Models. Models have the role more related to application's logic, being in direct connection with the Views.
+        </p>
+      </section>
+	  
+      <section id="apis">
+        <h3>APIs</h3>
+		
+        <p>
+          As the title sugests, we had to use apis in order to:
+		  <ol>
+		  <li>Connect with a social media website: we went with Facebook's API and we used it to share player's score/achievement with others!</li>
+		  <li>Generate questions: we used StackExchange's API to generate the specified questions, using their filter/query to navigate through 
+		  one of their sites: stackoverflow</li>
+		  </ol>
+        </p>
+      </section>
+	  
+	  <section id="code-management">
+        <h3>Source-code management</h3>
+		
+        <p>
+          We used Github as a Version Control System, simply because we became used with the platform from multiple projects that we had.
+        </p>
+      </section>
+	</section>	
+	  
+      <section id="firstPhase">
+        <h3>First phase</h3>
+        <p>
+			At first, we went for an oddly-themed shooter, with a more fantasy/horror like experience. But after
+			thoughts and general impression given by this idea, we wanted to give it a fresh, more arcade-game like
+			feeling.
+        </p>
+		<div class="firstImages">
+          <img src="images/firstphase1.png" width="300" height="200" alt="firstPh1">
+		  <img src="images/firstphase2.png" width="300" height="200" alt="firstPh2">
+		  <img src="images/firstphase3.png" width="300" height="200" alt="firstPh3">
+		</div>
+      </section>
+	
+    <section id="secondPhase">
+      <h2>Second Phase</h2>
+      <p>
+		Represents the current solution, where the spaceships/menu & background' theme were inspired by the well-known franchise "Star Wars".
+		Same goes for the game itself, its gameplay being influenced by an old game, as hinted in the name.
+	  </p>
+	   <div class="secondImages">
+          <img src="images/secondphase1.png" width="300" height="200" alt="secondPh1">
+		  <img src="images/secondphase2.png" width="300" height="200" alt="secondPh2">
+		  <img src="images/secondphase3.png" width="300" height="200" alt="secondPh3">
+		</div>
+    </section>
+
+	<section id="conclusions">
+      <h2>Conclusions</h2>
+      <p>
+		As a conclusion to this project finalisation, we are glad to say that the final result is one to be proud of, being a good-feeling,
+		fun to play and learning chance game. Despite the work we invested in it, we also got many in returns, from a fresh reminder of
+		HTML & CSS, we had the opportunity to learn java, to understand it's importance for the client and it's flexibility towards the entire
+		application.
+	  </p>
+    </section>
+  </body>
+</html>
