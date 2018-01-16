@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -52,6 +53,21 @@ namespace WAgI.Controllers
             return View();
         }
 
+        public async Task<IActionResult> SearchScoresByNickname(string nickname)
+        {
+            var scores = new List<Score>();
+
+            if (!string.IsNullOrEmpty(nickname))
+            {
+                scores = await _context.Scores
+                    .Where(score => score.Nickname.ToLower().Contains(nickname.ToLower()))
+                    .OrderBy(score => score.Value)
+                    .ToListAsync();
+            }
+
+            return View(scores);
+        }
+
         // GET: Home
         [Route("Home/Highscore/{pageNumber}")]
         public async Task<IActionResult> Highscore(int pageNumber)
@@ -102,6 +118,5 @@ namespace WAgI.Controllers
 
             await _context.SaveChangesAsync();
         }
-        
     }
 }
