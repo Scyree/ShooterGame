@@ -1,6 +1,5 @@
 ﻿var jsonObject;
 var score = 0;
-getDataFromStack();
 exit();
 
 function modifyValues() {
@@ -16,6 +15,7 @@ function getDataFromStack() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             jsonObject = JSON.parse(this.responseText);
+            getContent();
         }
     };
 

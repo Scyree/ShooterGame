@@ -1,9 +1,23 @@
 var game = new Game();
 var isEndGame = false;
 var check = true;
+var waveCounter = 0;
+var gamePaused = false;
+var countWaves = 1;
+var hits = 60;
+
+function startGame() {
+    document.getElementById('playButton').onclick = function () {
+        startGameCheck = true;
+        init();
+    }
+}
+
 function init() {
-	if(game.init())
-		game.start();
+    if (game.init()) {
+        getDataFromStack();
+        game.start();
+	}
 }
 
 
@@ -12,9 +26,10 @@ var imageRepository = new function() {
 	this.spaceship = new Image();
 	this.bullet = new Image();
 	this.enemy = new Image();
-	this.enemyBullet = new Image();
+    this.enemyBullet = new Image();
+    this.firstBoss = new Image();
 
-	var numImages = 5;
+	var numImages = 6;
 	var numLoaded = 0;
 	function imageLoaded() {
 		numLoaded++;
@@ -36,15 +51,18 @@ var imageRepository = new function() {
 	}
 	this.enemyBullet.onload = function() {
 		imageLoaded();
-	}
+    }
+    this.firstBoss.onload = function () {
+        imageLoaded();
+    }
 
 	this.background.src = "../../Images/gameBg.png";
 	this.spaceship.src = "../../Images/ship.png";
 	this.bullet.src = "../../Images/bullet.png";
 	this.enemy.src = "../../Images/enemy.png";
-	this.enemyBullet.src = "../../Images/bullet_enemy.png";
+    this.enemyBullet.src = "../../Images/bullet_enemy.png";
+    this.firstBoss.src = "../../Images/boss1.png";
 }
-
 
 function Drawable() {
 	this.init = function(x, y, width, height) {
@@ -69,7 +87,6 @@ function Drawable() {
 		return (this.collidableWith === object.type);
 	};
 }
-
 
 function Background() {
 	this.speed = 1;
@@ -132,7 +149,6 @@ function Bullet(object) {
 	};
 }
 Bullet.prototype = new Drawable();
-
 
 function QuadTree(boundBox, lvl) {
 	var maxObjects = 10;
@@ -326,6 +342,14 @@ function Pool(maxSize) {
 									 imageRepository.enemy.height);
 				pool[i] = enemy;
 			}
+        }
+		else if (object == "firstBoss") {
+		    for (var i = 0; i < size; i++) {
+		        var boss1 = new FirstBoss();
+		        boss1.init(0, 0, imageRepository.firstBoss.width,
+		            imageRepository.firstBoss.height);
+		        pool[i] = boss1;
+		    }
 		}
 		else if (object == "enemyBullet") {
 			for (var i = 0; i < size; i++) {
@@ -364,18 +388,47 @@ function Pool(maxSize) {
 			else
 				break;
 		}
-		if (game.enemyPool.getPool().length === 0) {
-			game.spawnWave();}
+        if (game.enemyPool.getPool().length === 0) {
+            if (!gamePaused) {
+                countWaves += 1;
+                if (countWaves % 2 === 0) {
+                    game.redirectToFirstBoss();
+                } else {
+                    game.redirectToWave();
+                } 
+            }
+            
+
+
+            /*gamePaused = true;
+            var element = document.getElementById("Context");
+            element.style.visibility = 'visible';
+
+          	if (!gamePaused) {
+			     game.spawnWave();
+			}*/
+        }
 	};
 }
 
+
+function unPauseGame() {
+    
+    if (gamePaused) {
+        gamePaused = false;
+        console.log("Val la game paused: " + gamePaused);
+        var element = document.getElementById("Context");
+        element.style.visibility = 'hidden';
+        game.init();
+    }
+}
 
 function Ship() {
 	this.colided=false;
 	this.speed = 3;
 	this.bulletPool = new Pool(30);
 	this.bulletPool.init("bullet");
-	var fireRate = 15;
+	var fireRate = 7;
 	var counter = 0;
 	this.collidableWith = "enemyBullet";
 	this.type = "ship";
@@ -425,16 +478,103 @@ function Ship() {
 	};
 
 	this.fire = function() {
-		this.bulletPool.getTwo(this.x+11, this.y, 3,
-		                       this.x+14, this.y, 3);
+		this.bulletPool.getTwo(this.x+0, this.y, 30,
+		                       this.x+30, this.y, 30);
 	};
 }
 Ship.prototype = new Drawable();
 
+function FirstBoss() {
+    
+    var percentFire = .01;
+    this.alive = false;
+    this.collidableWith = "bullet";
+    this.type = "firstBoss";
+
+    this.spawn = function (x, y, speed) {
+        this.x = x - 80;
+        this.y = y - 70;
+        this.speed = speed;
+        this.speedX = 0;
+        this.speedY = speed;
+        this.alive = true;
+        this.leftEdge = this.x - 200;
+        this.rightEdge = this.x - 20;
+        this.bottomEdge = this.y + 140;
+    };
+
+
+    this.draw = function () {
+        if (!check) {
+            return;
+        }
+        if (!isEndGame) {
+            this.context.clearRect(this.x - 1, this.y, this.width + 1, this.height);
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.x <= this.leftEdge) {
+                this.speedX = this.speed;
+            }
+            else if (this.x >= this.rightEdge + this.width) {
+                this.speedX = -this.speed;
+            }
+            else if (this.y >= this.bottomEdge) {
+                this.speed = 1.5;
+                this.speedY = 0;
+                this.y -= 5;
+                this.speedX = -this.speed;
+            }
+
+            if (!this.isColliding) {
+               
+                this.context.drawImage(imageRepository.firstBoss, this.x, this.y);
+
+                chance = Math.floor(Math.random() * 101);
+                if (chance / 100 < percentFire) {
+                    this.fire();
+                }
+
+                return false;
+            }
+            else {
+                console.log("Boss Lovit");
+                this.isColliding = !this.isColliding;
+                hits -= 1;
+                if (hits === 0) {
+                    hits = 60;
+                    var element = document.getElementById("Context");
+                    element.style.visibility = 'visible';
+                    gamePaused = true;
+                    return true;
+                }
+                return false; 
+            }
+        }
+        else {
+            alert("Game Over!");
+            check = false;
+        }
+
+    };
+
+    this.fire = function () {
+        game.enemyBulletPool.get(this.x + this.width / 2, this.y + this.height, -2.5);
+    };
+
+    this.clear = function () {
+        this.x = 0;
+        this.y = 0;
+        this.speed = 0;
+        this.speedX = 0;
+        this.speedY = 0;
+        this.alive = false;
+        this.isColliding = false;
+    };
+}
+FirstBoss.prototype = new Drawable();
 
 function Enemy() {
-	var percentFire = .01;
-	var chance = 0;
+	var percentFire = .0001 ;
 	this.alive = false;
 	this.collidableWith = "bullet";
 	this.type = "enemy";
@@ -458,7 +598,7 @@ function Enemy() {
 		}
 		if(!isEndGame){
 			this.context.clearRect(this.x-1, this.y, this.width+1, this.height);
-			this.x += this.speedX;
+			this.x += this.speedX ;
 			this.y += this.speedY;
 			if (this.x <= this.leftEdge) {
 				this.speedX = this.speed;
@@ -512,157 +652,180 @@ Enemy.prototype = new Drawable();
 
 
 function Game() {
-	this.init = function() {
-		this.bgCanvas = document.getElementById('background');
-		this.shipCanvas = document.getElementById('ship');
-		this.mainCanvas = document.getElementById('main');
+    this.init = function () {
+        this.bgCanvas = document.getElementById('background');
+        this.shipCanvas = document.getElementById('ship');
+        this.mainCanvas = document.getElementById('main');
 
-		if (this.bgCanvas.getContext) {
-			this.bgContext = this.bgCanvas.getContext('2d');
-			this.shipContext = this.shipCanvas.getContext('2d');
-			this.mainContext = this.mainCanvas.getContext('2d');
+        if (this.bgCanvas.getContext) {
+            this.bgContext = this.bgCanvas.getContext('2d');
+            this.shipContext = this.shipCanvas.getContext('2d');
+            this.mainContext = this.mainCanvas.getContext('2d');
 
-			Background.prototype.context = this.bgContext;
-			Background.prototype.canvasWidth = this.bgCanvas.width;
-			Background.prototype.canvasHeight = this.bgCanvas.height;
+            Background.prototype.context = this.bgContext;
+            Background.prototype.canvasWidth = this.bgCanvas.width;
+            Background.prototype.canvasHeight = this.bgCanvas.height;
 
-			Ship.prototype.context = this.shipContext;
-			Ship.prototype.canvasWidth = this.shipCanvas.width;
-			Ship.prototype.canvasHeight = this.shipCanvas.height;
+            Ship.prototype.context = this.shipContext;
+            Ship.prototype.canvasWidth = this.shipCanvas.width;
+            Ship.prototype.canvasHeight = this.shipCanvas.height;
 
-			Bullet.prototype.context = this.mainContext;
-			Bullet.prototype.canvasWidth = this.mainCanvas.width;
-			Bullet.prototype.canvasHeight = this.mainCanvas.height;
+            Bullet.prototype.context = this.mainContext;
+            Bullet.prototype.canvasWidth = this.mainCanvas.width;
+            Bullet.prototype.canvasHeight = this.mainCanvas.height;
 
-			Enemy.prototype.context = this.mainContext;
-			Enemy.prototype.canvasWidth = this.mainCanvas.width;
-			Enemy.prototype.canvasHeight = this.mainCanvas.height;
+            Enemy.prototype.context = this.mainContext;
+            Enemy.prototype.canvasWidth = this.mainCanvas.width;
+            Enemy.prototype.canvasHeight = this.mainCanvas.height;
 
-			this.background = new Background();
-			this.background.init(0,0); // Set draw point to 0,0
+            FirstBoss.prototype.context = this.mainContext;
+            FirstBoss.prototype.canvasWidth = this.mainCanvas.width;
+            FirstBoss.prototype.canvasHeight = this.mainCanvas.height;
 
-			this.ship = new Ship();
-			var shipStartX = this.shipCanvas.width/2- imageRepository.spaceship.width;
-			var shipStartY = this.shipCanvas.height/1.5 + imageRepository.spaceship.height*2;
-			this.ship.init(shipStartX, shipStartY,
-										 imageRepository.spaceship.width,
-			               imageRepository.spaceship.height);
+            this.background = new Background();
+            this.background.init(0, 0);
 
-			this.enemyPool = new Pool(30);
-			this.enemyPool.init("enemy");
-			this.spawnWave();
+            this.ship = new Ship();
+            var shipStartX = this.shipCanvas.width / 2 - imageRepository.spaceship.width;
+            var shipStartY = this.shipCanvas.height / 1.5 + imageRepository.spaceship.height * 2;
+            this.ship.init(shipStartX, shipStartY,
+                imageRepository.spaceship.width,
+                imageRepository.spaceship.height);
 
+            this.enemyPool = new Pool(30);
 
-			this.enemyBulletPool = new Pool(50);
-			this.enemyBulletPool.init("enemyBullet");
+            this.enemyPool.init("enemy");
+            this.spawnWave();
 
-			this.quadTree = new QuadTree({x:0,y:0,width:this.mainCanvas.width,height:this.mainCanvas.height});
+            this.enemyBulletPool = new Pool(30);
+            this.enemyBulletPool.init("enemyBullet");
 
-			return true;
-		} else {
-			return false;
-		}
-	};
+            this.quadTree = new QuadTree({ x: 0, y: 0, width: this.mainCanvas.width, height: this.mainCanvas.height });
 
-	this.spawnWave = function() {
-		var height = imageRepository.enemy.height;
-		var width = imageRepository.enemy.width;
-		var x = 100;
-		var y = -height;
-		var spacer = y * 1.5;
-		for (var i = 1; i <= 18; i++) {
-			this.enemyPool.get(x,y,2);
-			x += width + 25;
-			if (i % 6 == 0) {
-				x = 100;
-				y += spacer
-			}
-		}
-	};
+            return true;
+        } else {
+            return false;
+        }
+    };
 
-	this.start = function() {
-		this.ship.draw();
-		animate();
-	};
+    this.redirectToWave = function () {
+        this.enemyPool.init("enemy");
+        this.spawnWave();
+    }
+
+    this.redirectToFirstBoss = function () {
+        this.enemyPool.init("firstBoss");
+        this.spawnFirstBoss();
+    }
+
+    this.spawnFirstBoss = function () {
+        var height = imageRepository.firstBoss.height;
+        var width = imageRepository.firstBoss.width;
+        var x = 320;
+        var y = -height + 200;
+        this.enemyPool.get(x, y, 2);
+        x += width + 300;
+    };
+
+    this.spawnWave = function () {
+        var height = imageRepository.enemy.height;
+        var width = imageRepository.enemy.width;
+        var x = 100;
+        var y = -height;
+        var spacer = y * 1.5;
+        for (var i = 1; i <= 18; i++) {
+            this.enemyPool.get(x, y, 2);
+            x += width + 25;
+            if (i % 6 == 0) {
+                x = 100;
+                y += spacer;
+            }
+        }
+    };
+
+    this.start = function () {
+        this.ship.draw();
+        animate();
+    };
 }
 
 
 function animate() {
-	game.quadTree.clear();
-	game.quadTree.insert(game.ship);
-	game.quadTree.insert(game.ship.bulletPool.getPool());
-	game.quadTree.insert(game.enemyPool.getPool());
-	game.quadTree.insert(game.enemyBulletPool.getPool());
+    game.quadTree.clear();
+    game.quadTree.insert(game.ship);
+    game.quadTree.insert(game.ship.bulletPool.getPool());
+    game.quadTree.insert(game.enemyPool.getPool());
+    game.quadTree.insert(game.enemyBulletPool.getPool());
 
-	detectCollision();
+    detectCollision();
 
-	requestAnimFrame( animate );
-	game.background.draw();
-	game.ship.move();
-	game.ship.bulletPool.animate();
-	game.enemyPool.animate();
-	game.enemyBulletPool.animate();
+    requestAnimFrame(animate);
+    game.background.draw();
+    game.ship.move();
+    game.ship.bulletPool.animate();
+    game.enemyPool.animate();
+    game.enemyBulletPool.animate();
 }
 
 function detectCollision() {
-	var objects = [];
-	game.quadTree.getAllObjects(objects);
+    var objects = [];
+    game.quadTree.getAllObjects(objects);
 
-	for (var x = 0, len = objects.length; x < len; x++) {
-		game.quadTree.findObjects(obj = [], objects[x]);
+    for (var x = 0, len = objects.length; x < len; x++) {
+        game.quadTree.findObjects(obj = [], objects[x]);
 
-		for (y = 0, length = obj.length; y < length; y++) {
+        for (y = 0, length = obj.length; y < length; y++) {
 
-			// DETECT COLLISION ALGORITHM
-			if (objects[x].collidableWith === obj[y].type &&
-				(objects[x].x < obj[y].x + obj[y].width &&
-			     objects[x].x + objects[x].width > obj[y].x &&
-				 objects[x].y < obj[y].y + obj[y].height &&
-				 objects[x].y + objects[x].height > obj[y].y)) {
-				objects[x].isColliding = true;
-				obj[y].isColliding = true;
-			}
-		}
-	}
+            // DETECT COLLISION ALGORITHM
+            if (objects[x].collidableWith === obj[y].type &&
+                (objects[x].x < obj[y].x + obj[y].width &&
+                    objects[x].x + objects[x].width > obj[y].x &&
+                    objects[x].y < obj[y].y + obj[y].height &&
+                    objects[x].y + objects[x].height > obj[y].y)) {
+                objects[x].isColliding = true;
+                obj[y].isColliding = true;
+            }
+        }
+    }
 };
 
 
 KEY_CODES = {
-  32: 'space',
-  37: 'left',
-  38: 'up',
-  39: 'right',
-  40: 'down',
+    32: 'space',
+    37: 'left',
+    38: 'up',
+    39: 'right',
+    40: 'down',
 }
 
 KEY_STATUS = {};
 for (code in KEY_CODES) {
-  KEY_STATUS[KEY_CODES[code]] = false;
+    KEY_STATUS[KEY_CODES[code]] = false;
 }
-document.onkeydown = function(e) {
-	var keyCode = (e.keyCode) ? e.keyCode : e.charCode;
-  if (KEY_CODES[keyCode]) {
-		e.preventDefault();
-    KEY_STATUS[KEY_CODES[keyCode]] = true;
-  }
-}
-
-document.onkeyup = function(e) {
-  var keyCode = (e.keyCode) ? e.keyCode : e.charCode;
-  if (KEY_CODES[keyCode]) {
-    e.preventDefault();
-    KEY_STATUS[KEY_CODES[keyCode]] = false;
-  }
+document.onkeydown = function (e) {
+    var keyCode = (e.keyCode) ? e.keyCode : e.charCode;
+    if (KEY_CODES[keyCode]) {
+        e.preventDefault();
+        KEY_STATUS[KEY_CODES[keyCode]] = true;
+    }
 }
 
+document.onkeyup = function (e) {
+    var keyCode = (e.keyCode) ? e.keyCode : e.charCode;
+    if (KEY_CODES[keyCode]) {
+        e.preventDefault();
+        KEY_STATUS[KEY_CODES[keyCode]] = false;
+    }
+}
 
-window.requestAnimFrame = (function(){
-	return  window.requestAnimationFrame       ||
-			window.webkitRequestAnimationFrame ||
-			window.mozRequestAnimationFrame    ||
-			window.oRequestAnimationFrame      ||
-			window.msRequestAnimationFrame     ||
-			function(/* function */ callback, /* DOMElement */ element){
-				window.setTimeout(callback, 1000 / 60);
-			};
+
+window.requestAnimFrame = (function () {
+    return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        function (/* function */ callback, /* DOMElement */ element) {
+            window.setTimeout(callback, 1000 / 60);
+        };
 })();

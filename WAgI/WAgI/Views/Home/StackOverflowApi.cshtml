@@ -16,78 +16,119 @@
     ::-webkit-scrollbar {
         display: none;
     }
+    #Context {
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #pop-up-container {
+        background-color: white;
+        max-width: 90rem;
+
+        background: rgb(1, 1, 1);
+
+        -webkit-box-shadow: 0px 0px 70px -31px rgba(230,195,23,0.78);
+        -moz-box-shadow: 0px 0px 70px -31px rgba(230,195,23,0.78);
+        box-shadow: 0px 0px 70px -31px rgba(230,195,23,0.78);
+    }
 
     .text {
-        background-color: #333;
-        width: 100%;
-        height: inherit;
-        overflow: hidden;
+        position: relative;
+        padding: 2rem;
         color: white;
+        font-family: 'Acme', sans-serif;
     }
 
-    #answer1 {
-        background-color: #1f1414;
-        height: 80px;
-        overflow: scroll;
-        padding: 10px;
-        border: 5px solid #1a0000;
-        border-radius: 10px;
-        cursor: pointer;
+    #question-text {
+        font-size: 2rem;
     }
-
-    #answer2 {
-        background-color: #1f1414;
-        height: 80px;
-        overflow: scroll;
-        padding: 10px;
-        border: 5px solid #1a0000;
-        border-radius: 10px;
-        cursor: pointer;
-    }
-
-    #answer3 {
-        background-color: #1f1414;
-        height: 80px;
-        overflow: scroll;
-        padding: 10px;
-        border: 5px solid #1a0000;
-        border-radius: 10px;
-        cursor: pointer;
-    }
-
     #question {
-        background-color: #4d4d4d;
-        height: 200px;
+        padding-left: 1rem;
+        padding-right: 2rem;
+        text-align: left;
         overflow: scroll;
-        padding: 10px;
-        border: 5px solid #1a0000;
+        min-height: 10rem;
+        max-height: 15rem;
+        border: 3px;
+        width: 78rem;
+        margin: 1rem;
         border-radius: 10px;
+        /* -webkit-box-shadow: 0px 0px 161px -17px rgba(230,195,23,0.78);
+        -moz-box-shadow: 0px 0px 161px -17px rgba(230,195,23,0.78);
+        box-shadow: 0px 0px 161px -17px rgba(230,195,23,0.78);*/
+        -webkit-box-shadow: 0px 0px 70px -17px rgba(230,195,23,0.78);
+        -moz-box-shadow: 0px 0px 70px -17px rgba(230,195,23,0.78);
+        box-shadow: 0px 0px 70px -17px rgba(230,195,23,0.78);
     }
 
-    #Context {
-        width: 50%;
-        height: 640px;
-        margin-left: 25%;
+    .answer {
+        cursor: pointer;
+        position: relative;
+        top: 1rem;
+        display: inline-block;
+       /* border: 2px solid white;*/
+        width: 25.5rem;
+        max-width: 100%;
+        max-height: 100%;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        height: 15rem;
+        overflow: auto;
+        text-align: left;
+        margin-top: 0.3rem;
+        -webkit-box-shadow: 0px 0px 70px -31px rgba(230,195,23,0.78);
+        -moz-box-shadow: 0px 0px 70px -31px rgba(230,195,23,0.78);
+        box-shadow: 0px 0px 70px -31px rgba(230,195,23,0.78);
+
+
     }
+    .answer:hover {
+        -webkit-box-shadow: 0px 0px 37px 1px rgba(0,143,14,0.56);
+        -moz-box-shadow: 0px 0px 37px 1px rgba(0,143,14,0.56);
+        box-shadow: 0px 0px 37px 1px rgba(0,143,14,0.56);
+    }
+
 </style>
+<button type="button" onclick="getContent()">Get question</button>
+<form id="insertValues" action="Create">
+    <input id="nickname" type="hidden" name="nickname">
+    <input id="value" type="hidden" name="value">
+    <button onclick="saveScore()">Save</button>
+    
+</form>
 
+<button onclick="showPopUp()">show</button>
+<button onclick="hidePopUp()">hide</button>
+<button onclick="shareScore()">Share your score!</button>
 <div id="Context">
-    <button type="button" onclick="getContent()">Get question</button>
-    <div class="text">
-        <p id="question">
-        </p>
-        <p onclick="getScore(this.value)" id="answer1">
-        </p>
-        <p onclick="getScore(this.value)" id="answer2">
-        </p>
-        <p onclick="getScore(this.value)" id="answer3">
-        </p>
+    <div id="pop-up-container">
+        <div class="text">
+            <p id="question-text"> QuestSith</p>
+            <p id="question"></p>
+            <p onclick="getScore(this.value);getContent()" id="answer1" class="answer"></p>
+            <p onclick="getScore(this.value);getContent()" id="answer2" class="answer"></p>
+            <p onclick="getScore(this.value);getContent()" id="answer3" class="answer"></p>
+        </div>
     </div>
-
-    <form id="insertValues" action="Create">
-        <input id="nickname" type="hidden" name="nickname">
-        <input id="value" type="hidden" name="value">
-        <button onclick="saveScore()">Save</button>
-    </form>
-    <button onclick="shareScore()">Share your score!</button>
 </div>
+
+@section Scripts {
+    <script>
+        window.onload = function () {
+            getDataFromStack();
+        }
+
+        function showPopUp() {
+            var element = document.getElementById("Context");
+            element.style.visibility = 'visible';
+        }
+
+        function hidePopUp() {
+            var element = document.getElementById("Context");
+            element.style.visibility = 'hidden';
+        }
+
+
+    </script>
+}

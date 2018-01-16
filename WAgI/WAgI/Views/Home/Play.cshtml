@@ -1,34 +1,160 @@
 <environment include="Development">
+    <script src="../Javascripts/StackApi.js"></script>
     <script src="../Javascripts/SpaceShooter.js"></script>
-    <link rel="stylesheet" type="text/css" href="../styles/general.css" />
+
+    <link rel="stylesheet" type="text/css" href="../styles/general.css"/>
     <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+    <script src="http://connect.facebook.net/en_US/all.js" asp-append-version="true"></script>
+    <script src="https://api.stackexchange.com/js/2.0/all.js" asp-append-version="true"></script>
 </environment>    
 
+<style>
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    #Context {
+        visibility: hidden;
+        position: absolute;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+    }
+
+    #pop-up-container {
+        background-color: white;
+        width: 100%;
+        background: rgb(1, 1, 1);
+        -webkit-box-shadow: 0px 0px 70px -31px rgba(230,195,23,0.78);
+        -moz-box-shadow: 0px 0px 70px -31px rgba(230,195,23,0.78);
+        box-shadow: 0px 0px 70px -31px rgba(230,195,23,0.78);
+    }
+
+    .text {
+        position: relative;
+        align-content: center;
+        
+        color: white;
+        font-family: 'Acme', sans-serif;
+    }
+
+    #question-text {
+        font-size: 2rem;
+    }
+
+    #question {
+        text-align: left;
+        overflow: scroll;
+        min-height: 10rem;
+        max-height: 15rem;
+        width: 88%;
+        margin-left: 3%;
+        margin-right: 3%;
+        border: 3px;
+        padding: 3%;
+        border-radius: 10px;
+        /* -webkit-box-shadow: 0px 0px 161px -17px rgba(230,195,23,0.78);
+        -moz-box-shadow: 0px 0px 161px -17px rgba(230,195,23,0.78);
+        box-shadow: 0px 0px 161px -17px rgba(230,195,23,0.78);*/
+        -webkit-box-shadow: 0px 0px 70px -17px rgba(230,195,23,0.78);
+        -moz-box-shadow: 0px 0px 70px -17px rgba(230,195,23,0.78);
+        box-shadow: 0px 0px 70px -17px rgba(230,195,23,0.78);
+    }
+    #answers-container {
+        width: 94%;
+        margin-left: 3%;
+        margin-right: 3%;
+        
+    }
+    .answer {
+        cursor: pointer;
+        position: relative;
+        top: 1rem;
+        display: inline-block;
+        /* border: 2px solid white;*/
+        width: 28%;
+        max-height: 100%;
+        margin: 2%;
+        height: 15rem;
+        overflow: auto;
+        text-align: left;
+        margin-top: 0.3rem;
+        -webkit-box-shadow: 0px 0px 70px -31px rgba(230,195,23,0.78);
+        -moz-box-shadow: 0px 0px 70px -31px rgba(230,195,23,0.78);
+        box-shadow: 0px 0px 70px -31px rgba(230,195,23,0.78);
+    }
+
+        .answer:hover {
+            -webkit-box-shadow: 0px 0px 37px 1px rgba(0,143,14,0.56);
+            -moz-box-shadow: 0px 0px 37px 1px rgba(0,143,14,0.56);
+            box-shadow: 0px 0px 37px 1px rgba(0,143,14,0.56);
+        }
+</style>
+<button type="button" onclick="getContent()">Get question</button>
+<form id="insertValues" action="Create">
+    <input id="nickname" type="hidden" name="nickname">
+    <input id="value" type="hidden" name="value">
+    <button onclick="saveScore()">Save</button>
+
+</form>
+
+<button onclick="showPopUp()">show</button>
+<button onclick="hidePopUp()">hide</button>
+<button onclick="shareScore()">Share your score!</button>
+
+
 <div class="container">
-        <img src="../images/logo.png">
-        <h5>In a galaxy far far away ...a fuck.. was given..by Darth Vader</h5>
-      <div class="cnvs-container">
-            <canvas class="cnvs" id="background" width="600" height="360">
-                    Your browser does not support canvas. Please try again with a different browser.
-             </canvas>
-            
-            <canvas class="cnvs" id="main" width="600" height="360"></canvas>
-            <canvas class="cnvs" id="ship" width="600" height="360"></canvas>
-      </div>
-		 
-        <div  class="buttons">   
-                <div class="button-container"> 
-                    <a asp-action="Index">
-                     <input id="backButtonPlay"  class="button" type="button" value="BACK  TO  MAIN  MENU">
-                   </a>    
-                </div>     
-        </div>        
+    <div id="Context">
+        <div id="pop-up-container">
+            <div class="text">
+                <p id="question-text"> QuestSith</p>
+                <p id="question"></p>
+                <div id="answers-container">
+                    <p onclick="getScore(this.value); getContent();unPauseGame()" id="answer1" class="answer"></p>
+                    <p onclick="getScore(this.value); getContent();unPauseGame()" id="answer2" class="answer"></p>
+                    <p onclick="getScore(this.value); getContent();unPauseGame()" id="answer3" class="answer"></p>
+           
+  
+                </div>    
+                            </div>
+        </div>
+    </div>
+
+    <img src="../images/logo.png">
+    <h5>In a galaxy far far away ...a fuck.. was given..by Darth Vader</h5>
+    <div class="cnvs-container">
+        <canvas class="cnvs" id="background" width="600" height="360">
+            Your browser does not support canvas. Please try again with a different browser.
+        </canvas>
+
+        <canvas class="cnvs" id="main" width="600" height="360"></canvas>
+        <canvas class="cnvs" id="ship" width="600" height="360"></canvas>
+    </div>
+
+    <div class="buttons">
+        <div class="button-container">
+            <a asp-action="Index">
+                <input id="backButtonPlay" class="button" type="button" value="BACK  TO  MAIN  MENU">
+            </a>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
     <script>
         window.onload = function () {
             init();
+        }
+
+        function showPopUp() {
+            var element = document.getElementById("Context");
+            element.style.visibility = 'visible';
+        }
+
+        function hidePopUp() {
+            var element = document.getElementById("Context");
+            element.style.visibility = 'hidden';
         }
     </script>
 }

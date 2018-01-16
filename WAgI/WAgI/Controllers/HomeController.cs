@@ -74,7 +74,7 @@ namespace WAgI.Controllers
             }
             
             return View(await _context.Scores
-                .OrderBy(score => score.Value)
+                .OrderByDescending(score => score.Value)
                 .Skip((pageNumber - 1) * 10)
                 .Take(10)
                 .ToListAsync()
