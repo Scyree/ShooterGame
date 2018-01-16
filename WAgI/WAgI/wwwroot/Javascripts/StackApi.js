@@ -27,10 +27,15 @@ function getDataFromStack() {
 function getContent() {
     var answers = new Array();
     var question = getANormalQuestion(jsonObject);
+   // var scores = new Array();
 
     answers.push(getTheBestAnswerForGivenQuestion(question));
     answers.push(getARandomAnswer(getANormalQuestion(jsonObject)));
     answers.push(getARandomAnswer(getANormalQuestion(jsonObject)));
+
+    //scores.push(answers[0]);
+    //scores.push(answers[1]);
+    //scores.push(answers[2]);
 
     var newAnswers = swapRandomElements(answers);
 
