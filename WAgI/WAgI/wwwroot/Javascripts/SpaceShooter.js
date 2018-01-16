@@ -416,7 +416,6 @@ function unPauseGame() {
     
     if (gamePaused) {
         gamePaused = false;
-        console.log("Val la game paused: " + gamePaused);
         var element = document.getElementById("Context");
         element.style.visibility = 'hidden';
         game.init();
@@ -551,7 +550,8 @@ function FirstBoss() {
             }
         }
         else {
-            alert("Game Over!");
+            var element = document.getElementById("Menu");
+            element.style.visibility = 'visible';
             check = false;
         }
 
@@ -628,7 +628,8 @@ function Enemy() {
 			}
 		}
 		else {
-			alert("Game Over!");
+		    var element = document.getElementById("Menu");
+		    element.style.visibility = 'visible';
 			check = false;
 		}
 		
