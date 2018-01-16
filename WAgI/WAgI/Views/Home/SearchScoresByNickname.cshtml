@@ -1,9 +1,6 @@
 ﻿@model IEnumerable<WAgI.Entities.Score>
 
 @{
-    var pageIndex = (int)TempData["pageIndex"];
-    var lastPageNumber = (int)TempData["lastPageNumber"];
-    ViewBag.Title = "title";
     Layout = "_Layout";
 }
 
@@ -32,7 +29,7 @@
         </thead>
         <tbody>
             @{
-                var i = (pageIndex - 1) * 10 + 1;
+                var i = 1;
                 foreach (var item in Model)
                 {
                     <tr>
@@ -52,44 +49,6 @@
             }
         </tbody>
     </table>
-
-    @{
-        var i1 = pageIndex - 1;
-        var i2 = pageIndex;
-        var i3 = pageIndex + 1;
-
-        if (i1 != 1 && pageIndex != 1)
-        {
-            <a asp-action="Highscore" asp-route-id="1">1</a>
-        }
-
-        if (i2 > 3)
-        {
-            <text>...</text>
-        }
-
-        if (i1 > 0)
-        {
-            <a asp-action="Highscore" asp-route-id="@i1">@i1</a>
-        }
-
-        <a asp-action="Highscore" asp-route-id="@i2">@i2</a>
-
-        if (pageIndex != lastPageNumber)
-        {
-            <a asp-action="Highscore" asp-route-id="@i3">@i3</a>
-        }
-
-        if (i3 < lastPageNumber - 1)
-        {
-            <text>...</text>
-        }
-
-        if (pageIndex != lastPageNumber && i3 != lastPageNumber)
-        {
-            <a asp-action="Highscore" asp-route-id="@lastPageNumber">@lastPageNumber</a>
-        }
-    }
     <div class="buttons">
         <div class="button-container">
             <a asp-action="Index">
