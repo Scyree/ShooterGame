@@ -17,6 +17,7 @@
         width: 100%;
         align-content: center;
     }
+
     table {
         position: relative;
         left: 0px;
@@ -29,7 +30,6 @@
         color: white;
         display: inline-block;
         border: 2px solid white;
-        
     }
 
 
@@ -39,6 +39,7 @@
         background-color: rgb(230, 194, 0);
         color: black;
     }
+
     #cwebaca {
         position: relative;
         display: inline-block;
@@ -46,24 +47,23 @@
         max-width: 15rem;
         height: 20rem;
     }
-    .pagination a{
+
+    .pagination a {
         font-family: 'Acme', sans-serif;
         font-size: 25px;
         color: white;
         text-decoration: none;
     }
-     .pagination a:hover {
-          color: rgb(230, 194, 0);
 
-     }
-
-     
+        .pagination a:hover {
+            color: rgb(230, 194, 0);
+        }
 </style>
 
 <div class="tabel-container">
     <img src="../../images/logo.png">
     <h5>In a galaxy far far away ...4 developers tried to conquere the universe</h5>
-    
+
     <table class="table">
         <thead>
             <tr>
@@ -101,7 +101,7 @@
         </tbody>
         <img id="cwebaca" src="/images/cwebaca.png" />
     </table>
-    
+
     <div class="pagination">
         @{
             var i1 = pageIndex - 1;
@@ -110,7 +110,7 @@
 
             if (i1 != 1 && pageIndex != 1)
             {
-                <a asp-action="Highscore" asp-route-id="1">1</a>
+                <a href="1">1</a>
             }
 
             if (i2 > 3)
@@ -120,14 +120,14 @@
 
             if (i1 > 0)
             {
-                <a asp-action="Highscore" asp-route-id="@i1">@i1</a>
+                <a href="@i1">@i1</a>
             }
 
-            <a asp-action="Highscore" asp-route-id="@i2">@i2</a>
+            <a href="@i2">@i2</a>
 
             if (pageIndex != lastPageNumber)
             {
-                <a asp-action="Highscore" asp-route-id="@i3">@i3</a>
+                <a href="@i3">@i3</a>
             }
 
             if (i3 < lastPageNumber - 1)
@@ -137,17 +137,11 @@
 
             if (pageIndex != lastPageNumber && i3 != lastPageNumber)
             {
-                <a asp-action="Highscore" asp-route-id="@lastPageNumber">@lastPageNumber</a>
+                <a href="@lastPageNumber">@lastPageNumber</a>
             }
         }
-    
-    </div>
 
-        if (pageIndex != lastPageNumber && i3 != lastPageNumber)
-        {
-            <a asp-action="Highscore" asp-route-id="@lastPageNumber">@lastPageNumber</a>
-        }
-    }
+    </div>
     <div class="buttons">
         <div class="button-container">
             <a asp-action="Index">
@@ -157,7 +151,7 @@
     </div>
     @using (Html.BeginForm("SearchScoresByNickname", "Home", FormMethod.Get))
     {
-        @Html.TextBox("nickname", null)
+        @Html.TextBox("nickname", null, new { required = "required" })
         <br />
         <button class="button" type="submit">Search</button>
     }

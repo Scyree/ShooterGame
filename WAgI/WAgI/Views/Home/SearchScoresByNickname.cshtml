@@ -9,11 +9,62 @@
     <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
 </environment>
 
-<div class="container">
-    <img src="../../images/logo.png">
-    <h5>In a galaxy far far away ...a fuck.. was given..by Darth Vader</h5>
+<style>
+    .tabel-container {
+        width: 100%;
+        align-content: center;
+    }
 
-    <table class="table" style="background-color: black; color: white;">
+    table {
+        position: relative;
+        left: 0px;
+        /*height: 20rem;*/
+        min-height: 3rem;
+        max-height: 100%;
+        width: 40rem;
+        font-family: 'Acme', sans-serif;
+        font-size: 20px;
+        max-width: 70rem;
+        background-color: black;
+        color: white;
+        display: inline-block;
+        border: 2px solid white;
+    }
+
+
+    th {
+        padding-left: 5rem;
+        padding-right: 4.7rem;
+        background-color: rgb(230, 194, 0);
+        color: black;
+    }
+
+    #cwebaca {
+        position: relative;
+        display: inline-block;
+        left: 0;
+        top: 0;
+        max-width: 15rem;
+        height: 20rem;
+    }
+
+    .pagination a {
+        font-family: 'Acme', sans-serif;
+        font-size: 25px;
+        color: white;
+        text-decoration: none;
+    }
+
+        .pagination a:hover {
+            color: rgb(230, 194, 0);
+        }
+</style>
+
+<div class="tabel-container">
+    <img src="../../images/logo.png">
+    <h5>In a galaxy far far away ...4 developers tried to conquere the universe</h5>
+
+    <table class="table">
         <thead>
             <tr>
                 <th>
@@ -48,7 +99,9 @@
                 }
             }
         </tbody>
+        <img id="cwebaca" src="/images/cwebaca.png" />
     </table>
+    }
     <div class="buttons">
         <div class="button-container">
             <a asp-action="Index">
@@ -58,7 +111,7 @@
     </div>
     @using (Html.BeginForm("SearchScoresByNickname", "Home", FormMethod.Get))
     {
-        @Html.TextBox("nickname", null)
+        @Html.TextBox("nickname", null, new { required = "required" })
         <br />
         <button class="button" type="submit">Search</button>
     }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -54,10 +55,15 @@ namespace WAgI.Controllers
 
         public async Task<IActionResult> SearchScoresByNickname(string nickname)
         {
-            var scores = await _context.Scores
-                .Where(score => score.Nickname.ToLower().Contains(nickname.ToLower()))
-                .OrderBy(score => score.Value)
-                .ToListAsync();
+            var scores = new List<Score>();
+
+            if (!string.IsNullOrEmpty(nickname))
+            {
+                scores = await _context.Scores
+                    .Where(score => score.Nickname.ToLower().Contains(nickname.ToLower()))
+                    .OrderBy(score => score.Value)
+                    .ToListAsync();
+            }
 
             return View(scores);
         }
