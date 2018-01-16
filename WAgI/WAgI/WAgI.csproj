@@ -10,6 +10,10 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Pages\Home\SearchScoresByNickname.cshtml" />
+    <Compile Remove="Views\Scores\**" />
+    <Content Remove="Views\Scores\**" />
+    <EmbeddedResource Remove="Views\Scores\**" />
+    <None Remove="Views\Scores\**" />
   </ItemGroup>
 
   <ItemGroup>

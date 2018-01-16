@@ -12,11 +12,59 @@
     <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
 </environment>
 
-<div class="container">
-    <img src="../../images/logo.png">
-    <h5>In a galaxy far far away ...a fuck.. was given..by Darth Vader</h5>
+<style>
+    .tabel-container {
+        width: 100%;
+        align-content: center;
+    }
+    table {
+        position: relative;
+        left: 0px;
+        height: 20rem;
+        width: 40rem;
+        font-family: 'Acme', sans-serif;
+        font-size: 20px;
+        max-width: 70rem;
+        background-color: black;
+        color: white;
+        display: inline-block;
+        border: 2px solid white;
+        
+    }
 
-    <table class="table" style="background-color: black; color: white;">
+
+    th {
+        padding-left: 5rem;
+        padding-right: 4.7rem;
+        background-color: rgb(230, 194, 0);
+        color: black;
+    }
+    #cwebaca {
+        position: relative;
+        display: inline-block;
+        left: auto;
+        max-width: 15rem;
+        height: 20rem;
+    }
+    .pagination a{
+        font-family: 'Acme', sans-serif;
+        font-size: 25px;
+        color: white;
+        text-decoration: none;
+    }
+     .pagination a:hover {
+          color: rgb(230, 194, 0);
+
+     }
+
+     
+</style>
+
+<div class="tabel-container">
+    <img src="../../images/logo.png">
+    <h5>In a galaxy far far away ...4 developers tried to conquere the universe</h5>
+    
+    <table class="table">
         <thead>
             <tr>
                 <th>
@@ -51,39 +99,49 @@
                 }
             }
         </tbody>
+        <img id="cwebaca" src="/images/cwebaca.png" />
     </table>
+    
+    <div class="pagination">
+        @{
+            var i1 = pageIndex - 1;
+            var i2 = pageIndex;
+            var i3 = pageIndex + 1;
 
-    @{
-        var i1 = pageIndex - 1;
-        var i2 = pageIndex;
-        var i3 = pageIndex + 1;
+            if (i1 != 1 && pageIndex != 1)
+            {
+                <a asp-action="Highscore" asp-route-id="1">1</a>
+            }
 
-        if (i1 != 1 && pageIndex != 1)
-        {
-            <a asp-action="Highscore" asp-route-id="1">1</a>
+            if (i2 > 3)
+            {
+                <text>...</text>
+            }
+
+            if (i1 > 0)
+            {
+                <a asp-action="Highscore" asp-route-id="@i1">@i1</a>
+            }
+
+            <a asp-action="Highscore" asp-route-id="@i2">@i2</a>
+
+            if (pageIndex != lastPageNumber)
+            {
+                <a asp-action="Highscore" asp-route-id="@i3">@i3</a>
+            }
+
+            if (i3 < lastPageNumber - 1)
+            {
+                <text>...</text>
+            }
+
+            if (pageIndex != lastPageNumber && i3 != lastPageNumber)
+            {
+                <a asp-action="Highscore" asp-route-id="@lastPageNumber">@lastPageNumber</a>
+            }
         }
-
-        if (i2 > 3)
-        {
-            <text>...</text>
-        }
-
-        if (i1 > 0)
-        {
-            <a asp-action="Highscore" asp-route-id="@i1">@i1</a>
-        }
-
-        <a asp-action="Highscore" asp-route-id="@i2">@i2</a>
-
-        if (pageIndex != lastPageNumber)
-        {
-            <a asp-action="Highscore" asp-route-id="@i3">@i3</a>
-        }
-
-        if (i3 < lastPageNumber - 1)
-        {
-            <text>...</text>
-        }
+    
+    </div>
 
         if (pageIndex != lastPageNumber && i3 != lastPageNumber)
         {

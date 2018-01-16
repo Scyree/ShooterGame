@@ -1,5 +1,6 @@
 ﻿var jsonObject;
 var score = 0;
+
 exit();
 
 function modifyValues() {
@@ -26,10 +27,15 @@ function getDataFromStack() {
 function getContent() {
     var answers = new Array();
     var question = getANormalQuestion(jsonObject);
+   // var scores = new Array();
 
     answers.push(getTheBestAnswerForGivenQuestion(question));
     answers.push(getARandomAnswer(getANormalQuestion(jsonObject)));
     answers.push(getARandomAnswer(getANormalQuestion(jsonObject)));
+
+    //scores.push(answers[0]);
+    //scores.push(answers[1]);
+    //scores.push(answers[2]);
 
     var newAnswers = swapRandomElements(answers);
 
@@ -131,7 +137,16 @@ function swapRandomElements(array) {
 
 function getScore(value) {
     score += value;
+
     console.log(score);
+
+    countWaves += 1;
+
+    if (countWaves % 2 === 0) {
+        game.redirectToFirstBoss();
+    } else {
+        game.redirectToWave();
+    }
 }
 
 function shareScore() {
