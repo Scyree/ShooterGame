@@ -187,3 +187,22 @@ h5{
 .next-button:hover{
     color:rgb(230,194,0);
 }
+
+.startBoxDiv {
+    margin-top: 100px;
+    left: 210px;
+    color: #FF7F00;
+    font-family: Helvetica, sans-serif;
+    font-size: 30px;
+    cursor: default;
+}
+
+    .startBoxDiv span {
+        position: relative;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+        .startBoxDiv span:hover {
+            color: #FFD700;
+        }
