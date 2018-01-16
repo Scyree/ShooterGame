@@ -172,7 +172,7 @@ function shareScore() {
     FB.login(function() {
         FB.api('/me/feed', 'post', {
             message: "My StackInvaders Score is: " + score + "!\nChallenge me at:",
-            link: "https://github.com/Scyree/ShooterGame/blob/master/ShooterGame/Images/bg.png?raw=true"
+            link: "https://imgur.com/a/jcSQd"
         });
     }, {scope: 'publish_actions' });
 }

@@ -478,8 +478,8 @@ function Ship() {
 	};
 
 	this.fire = function() {
-		this.bulletPool.getTwo(this.x+0, this.y, 30,
-		                       this.x+30, this.y, 30);
+		this.bulletPool.getTwo(this.x+11, this.y, 25,
+		                       this.x+15, this.y, 25);
 	};
 }
 Ship.prototype = new Drawable();
