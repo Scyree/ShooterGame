@@ -1,57 +1,39 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<WAgI.Entities.Score>
+
+@{
+    ViewData["Title"] = "Index";
 }
 
-@section Scripts{
-    <script>
-        var home = document.getElementsByClassName('activeHome');
-        for (var i = 0; i < home.length; i++) {
-            home[i].style.backgroundColor = "white";
-            home[i].style.color = "#3d3d3d";
-        }
-    </script>
-}
+<environment include="Development">
+    <link rel="stylesheet" type="text/css" href="../styles/general.css" />
+    <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+</environment>
 
-@section Styles{
-    <environment include="Development">
-        <link rel="stylesheet" href="~/css/home.css" />
-        <script src="~/js/homeSlidesDisplay.js"></script>
-    </environment>
-}
-
-<div class="content">
-
-    <div class="home-content">
-            <div class="slides fade">
-                <img id="image" src="~/images/home/image1.png">
-                <div class="overlay">
-                    <div class="text">
-                        <p>Prima versiune a proiectului este gata!</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="slides fade">
-                <img id="image" src="~/images/home/image2.png">
-                <div class="overlay">
-                    <div class="text">
-                        <p>StackOverflow face parte din reteaua StackExchange-ului,</p>
-                        <p>fiind orientat spre partea de programare</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="slides fade">
-                <img id="image" src="~/images/home/image3.png">
-                <div class="overlay">
-                    <div class="text">
-                        <p>StackExchange este o retea ce acopera</p>
-                        <p>toate topicurile posibile</p>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <img src="../images/logo.png">
+    <h5>In a galaxy far far away ...4 developers tried to conquer the universe</h5>
+    <div class="buttons">
+        <div class="button-container">
+            <a asp-action="Intro">
+                <input class="button" type="button" value="PLAY">
+            </a>   
         </div>
-        <a class="prev" onclick="plusSlides(-1)"><img id="arrow" src="~/images/home/left-arrow.png" /></a>
-        <a class="next" onclick="plusSlides(1)"><img id="arrow" src="~/images/home/right-arrow.png" /></a>
-   
+        <div class="button-container">
+            <a asp-action="Highscore" asp-route-id="1">
+                <input class="button" type="button" value="HIGHSCORE">
+            </a>      
+        </div>
+        <div class="button-container">
+            <a asp-action="HowToPlay">
+                <input class="button" type="button" value="HOW TO PLAY">
+            </a>      
+        </div>   
+        <div class="button-container">
+            <a asp-action="About">
+                <input class="button" type="button" value="ABOUT">
+            </a>    
+        </div>
+                
+                   
+    </div>        
 </div>

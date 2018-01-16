@@ -1,0 +1,134 @@
+﻿@model IEnumerable<WAgI.Entities.Score>
+
+@{
+    ViewData["Title"] = "StackOverflowApi";
+}
+
+<environment include="Development">
+    <link rel="stylesheet" type="text/css" href="../styles/general.css" />
+    <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+    <script src="../Javascripts/StackApi.js" asp-append-version="true"></script>
+    <script src="http://connect.facebook.net/en_US/all.js" asp-append-version="true"></script>
+    <script src="https://api.stackexchange.com/js/2.0/all.js" asp-append-version="true"></script>
+</environment>
+
+<style>
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    #Context {
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #pop-up-container {
+        background-color: white;
+        max-width: 90rem;
+
+        background: rgb(1, 1, 1);
+
+        -webkit-box-shadow: 0px 0px 70px -31px rgba(230,195,23,0.78);
+        -moz-box-shadow: 0px 0px 70px -31px rgba(230,195,23,0.78);
+        box-shadow: 0px 0px 70px -31px rgba(230,195,23,0.78);
+    }
+
+    .text {
+        position: relative;
+        padding: 2rem;
+        color: white;
+        font-family: 'Acme', sans-serif;
+    }
+
+    #question-text {
+        font-size: 2rem;
+    }
+    #question {
+        padding-left: 1rem;
+        padding-right: 2rem;
+        text-align: left;
+        overflow: scroll;
+        min-height: 10rem;
+        max-height: 15rem;
+        border: 3px;
+        width: 78rem;
+        margin: 1rem;
+        border-radius: 10px;
+        /* -webkit-box-shadow: 0px 0px 161px -17px rgba(230,195,23,0.78);
+        -moz-box-shadow: 0px 0px 161px -17px rgba(230,195,23,0.78);
+        box-shadow: 0px 0px 161px -17px rgba(230,195,23,0.78);*/
+        -webkit-box-shadow: 0px 0px 70px -17px rgba(230,195,23,0.78);
+        -moz-box-shadow: 0px 0px 70px -17px rgba(230,195,23,0.78);
+        box-shadow: 0px 0px 70px -17px rgba(230,195,23,0.78);
+    }
+
+    .answer {
+        cursor: pointer;
+        position: relative;
+        top: 1rem;
+        display: inline-block;
+       /* border: 2px solid white;*/
+        width: 25.5rem;
+        max-width: 100%;
+        max-height: 100%;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        height: 15rem;
+        overflow: auto;
+        text-align: left;
+        margin-top: 0.3rem;
+        -webkit-box-shadow: 0px 0px 70px -31px rgba(230,195,23,0.78);
+        -moz-box-shadow: 0px 0px 70px -31px rgba(230,195,23,0.78);
+        box-shadow: 0px 0px 70px -31px rgba(230,195,23,0.78);
+
+
+    }
+    .answer:hover {
+        -webkit-box-shadow: 0px 0px 37px 1px rgba(0,143,14,0.56);
+        -moz-box-shadow: 0px 0px 37px 1px rgba(0,143,14,0.56);
+        box-shadow: 0px 0px 37px 1px rgba(0,143,14,0.56);
+    }
+
+</style>
+<button type="button" onclick="getContent()">Get question</button>
+<form id="insertValues" action="Create">
+    <input id="nickname" type="hidden" name="nickname">
+    <input id="value" type="hidden" name="value">
+    <button onclick="saveScore()">Save</button>
+    
+</form>
+
+<button onclick="showPopUp()">show</button>
+<button onclick="hidePopUp()">hide</button>
+<button onclick="shareScore()">Share your score!</button>
+<div id="Context">
+    <div id="pop-up-container">
+        <div class="text">
+            <p id="question-text"> QuestSith</p>
+            <p id="question"></p>
+            <p onclick="getScore(this.value);getContent()" id="answer1" class="answer"></p>
+            <p onclick="getScore(this.value);getContent()" id="answer2" class="answer"></p>
+            <p onclick="getScore(this.value);getContent()" id="answer3" class="answer"></p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        window.onload = function () {
+            getDataFromStack();
+        }
+
+        function showPopUp() {
+            var element = document.getElementById("Context");
+            element.style.visibility = 'visible';
+        }
+
+        function hidePopUp() {
+            var element = document.getElementById("Context");
+            element.style.visibility = 'hidden';
+        }
+
+
+    </script>
+}
