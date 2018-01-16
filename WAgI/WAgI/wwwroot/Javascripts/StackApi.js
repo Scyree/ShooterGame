@@ -1,6 +1,6 @@
 ﻿var jsonObject;
 var score = 0;
-
+var correctAnswer;
 exit();
 
 function modifyValues() {
@@ -27,19 +27,27 @@ function getDataFromStack() {
 function getContent() {
     var answers = new Array();
     var question = getANormalQuestion(jsonObject);
-   // var scores = new Array();
+    var bestScore;
 
     answers.push(getTheBestAnswerForGivenQuestion(question));
     answers.push(getARandomAnswer(getANormalQuestion(jsonObject)));
     answers.push(getARandomAnswer(getANormalQuestion(jsonObject)));
 
-    //scores.push(answers[0]);
-    //scores.push(answers[1]);
-    //scores.push(answers[2]);
+    bestScore = answers[0].score;
 
     var newAnswers = swapRandomElements(answers);
 
     document.getElementById("question").innerHTML = question.body;
+
+    if (bestScore == newAnswers[0].score) {
+        correctAnswer = "a)";
+    }
+    if (bestScore == newAnswers[1].score) {
+        correctAnswer = "b)";
+    }
+    if (bestScore == newAnswers[2].score) {
+        correctAnswer = "c)";
+    }
 
     document.getElementById("answer1").innerHTML = newAnswers[0].body;
     document.getElementById("answer1").value = newAnswers[0].score;
@@ -137,8 +145,8 @@ function swapRandomElements(array) {
 
 function getScore(value) {
     score += value;
-
     console.log(score);
+    alert("Correct answer: " + correctAnswer);
 
     countWaves += 1;
 
