@@ -137,9 +137,7 @@
                 <div id="answers-container">
                     <p onclick="getScore(this.value); getContent();unPauseGame()" id="answer1" class="answer"></p>
                     <p onclick="getScore(this.value); getContent();unPauseGame()" id="answer2" class="answer"></p>
-                    <p onclick="getScore(this.value); getContent();unPauseGame()" id="answer3" class="answer"></p>
-           
-  
+                    <p onclick="getScore(this.value); getContent();unPauseGame()" id="answer3" class="answer"></p>           
                 </div>    
             </div>
         </div>
@@ -152,6 +150,7 @@
                 <input onclick="location.reload()" class="button" value="Restart"></input>
                 <input onclick="saveScore()" class="button" value="Save Score!"></input>
                 <input onclick="shareScore()" class="button" value="Share Score!"></input>
+                </div>
             </div>
         </div>
     </div>
@@ -166,6 +165,15 @@
         <canvas class="cnvs" id="main" width="600" height="360"></canvas>
         <canvas class="cnvs" id="ship" width="600" height="360"></canvas>
     </div>
+
+
+    <div class="startBoxDiv" id="startBoxId">
+        Press PLAY to start the game !
+        <p>
+            <span id="playButton" onclick="startGame()">PLAY</span>
+        </p>
+    </div>
+
 
     <div class="buttons">
         <div class="button-container">

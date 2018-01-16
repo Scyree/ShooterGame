@@ -1,10 +1,10 @@
 var game = new Game();
 var isEndGame = false;
 var check = true;
-var waveCounter = 0;
 var gamePaused = false;
 var countWaves = 1;
 var hits = 60;
+var startGameCheck = false;
 
 function startGame() {
     document.getElementById('playButton').onclick = function () {
@@ -14,9 +14,10 @@ function startGame() {
 }
 
 function init() {
-    if (game.init()) {
+    if (game.init() && this.startGameCheck) {
         getDataFromStack();
         game.start();
+        document.getElementById('startBoxId').outerHTML = "";
 	}
 }
 
@@ -418,7 +419,6 @@ function unPauseGame() {
         gamePaused = false;
         var element = document.getElementById("Context");
         element.style.visibility = 'hidden';
-        game.init();
     }
 }
 

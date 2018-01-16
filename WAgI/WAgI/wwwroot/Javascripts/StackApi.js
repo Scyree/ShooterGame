@@ -1,5 +1,6 @@
 ﻿var jsonObject;
 var score = 0;
+
 exit();
 
 function modifyValues() {
@@ -131,7 +132,16 @@ function swapRandomElements(array) {
 
 function getScore(value) {
     score += value;
+
     console.log(score);
+
+    countWaves += 1;
+
+    if (countWaves % 2 === 0) {
+        game.redirectToFirstBoss();
+    } else {
+        game.redirectToWave();
+    }
 }
 
 function shareScore() {
