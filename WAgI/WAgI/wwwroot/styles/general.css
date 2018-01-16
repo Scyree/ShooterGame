@@ -60,7 +60,7 @@ h5{
 }
 #backButtonPlay{
     position: relative;
-    top: 25rem;
+    top: 15rem;
     width: 20rem;
 }
 
@@ -134,7 +134,7 @@ h5{
 
 #back-button-how-to-play{
     position: relative;
-    top: 7rem;
+    top: 10rem;
     left:4rem;
     width: 20rem;
 }
@@ -156,6 +156,7 @@ h5{
     float: left;
     
 }
+
 
 #nickname-input:focus{
     outline: none;
@@ -204,6 +205,6 @@ h5{
    cursor: pointer;
 }
 
-    .startBoxDiv span:hover {
+.startBoxDiv span:hover {
         color: rgb(230,194,0);
-    }
+}

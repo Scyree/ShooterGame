@@ -41,22 +41,28 @@ function getContent() {
 
     if (bestScore == newAnswers[0].score) {
         correctAnswer = "a)";
+        document.getElementById("answer1").value = newAnswers[0].score;
+        document.getElementById("answer2").value = 1;
+        document.getElementById("answer3").value = 1;
     }
     if (bestScore == newAnswers[1].score) {
         correctAnswer = "b)";
+        document.getElementById("answer1").value = 1;
+        document.getElementById("answer2").value = newAnswers[1].score;
+        document.getElementById("answer3").value = 1;
     }
     if (bestScore == newAnswers[2].score) {
         correctAnswer = "c)";
+        document.getElementById("answer1").value = 1;
+        document.getElementById("answer2").value = 1;
+        document.getElementById("answer3").value = newAnswers[2].score;
     }
 
     document.getElementById("answer1").innerHTML = newAnswers[0].body;
-    document.getElementById("answer1").value = newAnswers[0].score;
 
     document.getElementById("answer2").innerHTML = newAnswers[1].body;
-    document.getElementById("answer2").value = newAnswers[1].score;
 
     document.getElementById("answer3").innerHTML = newAnswers[2].body;
-    document.getElementById("answer3").value = newAnswers[2].score;
 }
 
 function getRandomNumber(number) {
@@ -145,8 +151,7 @@ function swapRandomElements(array) {
 
 function getScore(value) {
     score += value;
-    console.log(score);
-    alert("Correct answer: " + correctAnswer);
+    alert("Total score: " + score + "Correct answer: " + correctAnswer);
 
     countWaves += 1;
 

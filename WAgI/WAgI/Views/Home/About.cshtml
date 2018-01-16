@@ -3,18 +3,32 @@
     <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
 </environment>
 
+<style>
+    #darthVader {
+        min-width: 40rem;
+        max-width: 70rem;
+        min-height: 50rem;
+        max-height: 80rem;
+    }
+</style>
+
 <div class="big-container">    
         <div id="about-page" class="container">
                 <img src="../images/logo.png">
-                <h5>In a galaxy far far away ...4 developers tried to conquere the universe</h5>
+                <h5>In a galaxy far far away ...4 developers tried to conquer the universe</h5>
+            
+            <div id="wrapper">
                 <div  class="description-text">
-                        In a galaxy far far a way the little ship of HanSolo is set to defeat the vengeful Darth Vader. He will put at your dispose his Milenium Falcon  but you'll be the one in the driver seat.
-                        Numerous Storm Trooper spaceships will try to stop you coming at you in big waves sustained by a Sith Lord. The Sith Lord can be attacked only 
-                        after you defeated all the storm Troopers in that certian wave and to defeat him you'll have to answer corectly on a question from StackOverflow but don't worry, the Force
-                        comes in your help giving you 3 answers for that question from which one of them will be the most upvoted answer.Yout goal is to defeat as many Sith Lords as you can 
+                    In a galaxy far far a way the little ship of HanSolo is set to defeat the vengeful Darth Vader. He will put at your dispose his Milenium Falcon  but you'll be the one in the driver seat.
+                    Numerous Storm Trooper spaceships will try to stop you coming at you in big waves sustained by a Sith Lord. The Sith Lord can be attacked only 
+                    after you defeated all the storm Troopers in that certian wave and to defeat him you'll have to answer corectly on a question from StackOverflow but don't worry, the Force
+                    comes in your help giving you 3 answers for that question from which one of them will be the most upvoted answer.Yout goal is to defeat as many Sith Lords as you can 
                     and improve your knowledge. HAve fun! <br/><br/>
-                        P.S. Darth Vader not yet implemented
+                    P.S. Darth Vader not yet implemented
                 </div>
+                <img id="darthVader" src="/images/darth.png"/>
+            </div>
+                
                 <div class="buttons">
                     <a asp-action="Index">
                        <input   class="button" type="button" value="Back">

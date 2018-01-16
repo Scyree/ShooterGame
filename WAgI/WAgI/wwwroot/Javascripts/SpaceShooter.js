@@ -17,8 +17,9 @@ function init() {
     if (game.init() && this.startGameCheck) {
         getDataFromStack();
         game.start();
-        document.getElementById('startBoxId').outerHTML = "";
-	}
+        var element = document.getElementById('startBoxId');
+        element.style.visibility = 'hidden';
+    }
 }
 
 
