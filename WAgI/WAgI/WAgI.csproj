@@ -5,14 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Pages\Home\SearchScoresByNickname.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Pages\Home\SearchScoresByNickname.cshtml" />
+    <Compile Remove="Pages\**" />
     <Compile Remove="Views\Scores\**" />
+    <Content Remove="Pages\**" />
     <Content Remove="Views\Scores\**" />
+    <EmbeddedResource Remove="Pages\**" />
     <EmbeddedResource Remove="Views\Scores\**" />
+    <None Remove="Pages\**" />
     <None Remove="Views\Scores\**" />
   </ItemGroup>
 
@@ -25,14 +24,6 @@
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Scores\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Pages\Home\SearchScoresByNickname.cshtml" />
   </ItemGroup>
 
 </Project>

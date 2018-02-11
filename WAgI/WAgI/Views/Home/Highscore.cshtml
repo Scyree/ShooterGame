@@ -3,7 +3,7 @@
 @{
     var pageIndex = (int)TempData["pageIndex"];
     var lastPageNumber = (int)TempData["lastPageNumber"];
-    ViewBag.Title = "title";
+    ViewBag.Title = "Highscore";
     Layout = "_Layout";
 }
 
@@ -20,7 +20,7 @@
 
     table {
         position: relative;
-        left: 0px;
+        left: 0;
         height: 20rem;
         width: 40rem;
         font-family: 'Acme', sans-serif;
@@ -31,7 +31,6 @@
         display: inline-block;
         border: 2px solid white;
     }
-
 
     th {
         padding-left: 5rem;
@@ -55,53 +54,58 @@
         text-decoration: none;
     }
 
-        .pagination a:hover {
-            color: rgb(230, 194, 0);
-        }
+    .pagination a:hover {
+        color: rgb(230, 194, 0);
+    }
 </style>
 
 <div class="tabel-container">
-    <img src="../../images/logo.png">
+    <img alt="logo" src="../../images/logo.png" />
 
     <h5>In a galaxy far far away ...4 developers tried to conquer the universe</h5>
-    
+    <button id="stanga">Stanga</button>
     <table class="table">
         <thead>
-            <tr>
-                <th>
-                    Rank
-                </th>
-                <th>
-                    Nickname
-                </th>
-                <th>
-                    Score
-                </th>
-            </tr>
+        <tr>
+            <th>
+                Rank
+            </th>
+            <th>
+                Nickname
+            </th>
+            <th>
+                Score
+            </th>
+        </tr>
         </thead>
         <tbody>
-            @{
-                var i = (pageIndex - 1) * 10 + 1;
-                foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @i
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nickname)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Value)
-                        </td>
-                    </tr>
+        @{
+            var i = (pageIndex - 1) * 10 + 1;
+            var j = 0;
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td id="h_rank_@j">
+                        @i
+                    </td>
+                    <td id="h_nickname_@j">
+                        @Html.DisplayFor(modelItem => item.Nickname)
+                    </td>
+                    <td id="h_value_@j">
+                        @Html.DisplayFor(modelItem => item.Value)
+                    </td>
+                </tr>
 
-                    ++i;
-                }
+                ++i;
+                ++j;
             }
+        }
         </tbody>
-        <img id="cwebaca" src="/images/cwebaca.png" />
+        @*<img alt="cwebaca" id="cwebaca" src="/images/cwebaca.png" />*@
     </table>
+
+
+    <button id="dreapta">Dreapta</button>
 
     <div class="pagination">
         @{
@@ -141,8 +145,8 @@
                 <a href="@lastPageNumber">@lastPageNumber</a>
             }
         }
-
     </div>
+
     <div class="buttons">
         <div class="button-container">
             <a asp-action="Index">
@@ -150,6 +154,7 @@
             </a>
         </div>
     </div>
+
     @using (Html.BeginForm("SearchScoresByNickname", "Home", FormMethod.Get))
     {
         @Html.TextBox("nickname", null, new { required = "required" })
@@ -157,3 +162,84 @@
         <button class="button" type="submit">Search</button>
     }
 </div>
+
+@section Scripts
+{
+    <script>
+        var currentPage = 3;
+
+        var leftButton = document.getElementById("stanga");
+        var rightButton = document.getElementById("dreapta");
+
+        leftButton.addEventListener("click", function () {
+            if (currentPage > 1) {
+                currentPage--;
+
+                var ourRequest = new XMLHttpRequest();
+                ourRequest.open('GET', 'http://localhost:51664/Home/Highscore/PlayerList/' + currentPage);
+
+                ourRequest.onload = function () {
+                    var ourData = JSON.parse(ourRequest.responseText);
+                    console.log(ourData);
+                    for (var i = 0; i < ourData.length; ++i) {
+                        var rankTd = document.getElementById("h_rank_" + i);
+                        var nicknameTd = document.getElementById("h_nickname_" + i);
+                        var valueTd = document.getElementById("h_value_" + i);
+
+                        rankTd.innerHTML = (currentPage - 1) * 10 + i + 1;
+                        nicknameTd.innerHTML = ourData[i].nickname;
+                        valueTd.innerHTML = ourData[i].value;
+                    }
+
+                    for (var i = ourData.length; i < 10; ++i) {
+                        var rankTd = document.getElementById("h_rank_" + i);
+                        var nicknameTd = document.getElementById("h_nickname_" + i);
+                        var valueTd = document.getElementById("h_value_" + i);
+
+                        rankTd.innerHTML = "";
+                        nicknameTd.innerHTML = "";
+                        valueTd.innerHTML = "";
+                    }
+                }
+
+                ourRequest.send();
+            }
+        });
+
+        rightButton.addEventListener("click", function () {
+            if (currentPage < 9) {
+                currentPage++;
+
+                var ourRequest = new XMLHttpRequest();
+                ourRequest.open('GET', 'http://localhost:51664/Home/Highscore/PlayerList/' + currentPage);
+
+                ourRequest.onload = function () {
+                    var ourData = JSON.parse(ourRequest.responseText);
+                    console.log(ourData);
+                    for (var i = 0; i < ourData.length; ++i) {
+                        var rankTd = document.getElementById("h_rank_" + i);
+                        var nicknameTd = document.getElementById("h_nickname_" + i);
+                        var valueTd = document.getElementById("h_value_" + i);
+
+                        rankTd.innerHTML = (currentPage - 1) * 10 + (i + 1);
+                        nicknameTd.innerHTML = ourData[i].nickname;
+                        valueTd.innerHTML = ourData[i].value;
+                    }
+
+                    for (var i = ourData.length; i < 10; ++i) {
+                        var rankTd = document.getElementById("h_rank_" + i);
+                        var nicknameTd = document.getElementById("h_nickname_" + i);
+                        var valueTd = document.getElementById("h_value_" + i);
+
+                        rankTd.innerHTML = "";
+                        nicknameTd.innerHTML = "";
+                        valueTd.innerHTML = "";
+                    }
+                }
+
+                ourRequest.send();
+            }
+        });
+
+    </script> 
+}

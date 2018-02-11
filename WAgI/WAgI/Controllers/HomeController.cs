@@ -68,7 +68,6 @@ namespace WAgI.Controllers
             return View(scores);
         }
 
-        // GET: Home
         [Route("Home/Highscore/{pageNumber}")]
         public async Task<IActionResult> Highscore(int pageNumber)
         {
@@ -95,6 +94,16 @@ namespace WAgI.Controllers
                 .Take(10)
                 .ToListAsync()
             );
+        }
+
+        [Route("Home/Highscore/PlayerList/{pageNumber}")]
+        public async Task<IActionResult> PlayerList(int pageNumber)
+        {
+            return Json(await _context.Scores
+                .OrderByDescending(score => score.Value)
+                .Skip((pageNumber - 1) * 10)
+                .Take(10)
+                .ToListAsync());
         }
 
         // POST: Home/Create
