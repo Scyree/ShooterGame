@@ -61,11 +61,11 @@ namespace WAgI.Controllers
             {
                 scores = await _context.Scores
                     .Where(score => score.Nickname.ToLower().Contains(nickname.ToLower()))
-                    .OrderBy(score => score.Value)
+                    .OrderByDescending(score => score.Value)
                     .ToListAsync();
             }
 
-            return View(scores);
+            return Json(scores);
         }
 
         [Route("Home/Highscore/{pageNumber}")]
