@@ -89,7 +89,7 @@
     <div class="pagination">
         @for (i = 1; i <= lastPageNumber; ++i)
         {
-            <input type="button" id="page_@i" value="@i" />
+            <input type="button" id="page_@i" value="@i" onclick="getAjaxValues(@i)" />
         }
     </div>
 
@@ -190,9 +190,9 @@
                     }
 
                     /* Change the color of the current button and of the old one */
-                    currentPageButton.style.color = 'white';
                     currentPageButton = document.getElementById("page_" + currentPage);
                     currentPageButton.style.color = 'yellow';
+                    document.getElementById("page_" + (currentPage + 1)).style.color = 'white';
 
                     var ourRequest = new XMLHttpRequest();
                     ourRequest.open('GET', 'http://localhost:51664/Home/Highscore/Json/' + currentPage);
@@ -261,9 +261,9 @@
                     }
 
                     /* Change the color of the current button and of the old one */
-                    currentPageButton.style.color = 'white';
                     currentPageButton = document.getElementById("page_" + currentPage);
                     currentPageButton.style.color = 'yellow';
+                    document.getElementById("page_" + (currentPage - 1)).style.color = 'white';
 
                     var ourRequest = new XMLHttpRequest();
                     ourRequest.open('GET', 'http://localhost:51664/Home/Highscore/Json/' + currentPage);
@@ -300,79 +300,153 @@
                 }
             });
 
-        for (var i = 0; i < @lastPageNumber; ++i) {
+        function getAjaxValues(page)
+        {
+            currentPage = page;
+            var currentPageButton = document.getElementById("page_" + currentPage);
+
+            /* Show adjacent button */
+            if (currentPage - 2 > 3) {
+                document.getElementById('page_' + (currentPage - 2)).style.display = 'inline-block';
+            }
+
+            if (currentPage - 1 > 3) {
+                document.getElementById('page_' + (currentPage - 1)).style.display = 'inline-block';
+            }
+
+            if (currentPage + 1 <= @lastPageNumber - 3) {
+                document.getElementById('page_' + (currentPage + 1)).style.display = 'inline-block';
+            }
+
+            if (currentPage + 2 <= @lastPageNumber - 3) {
+                document.getElementById('page_' + (currentPage + 2)).style.display = 'inline-block';
+            }
+
+            /* Sterge punctele de suspensie */
+            var textsToBeDeleted = document.getElementsByClassName("ephemerText");
+            for (var k = 0; k < textsToBeDeleted.length; ++k) {
+                textsToBeDeleted[k].parentNode.removeChild(textsToBeDeleted[k]);
+                --k;
+            }
+
+            /* Hide too far away pages */
+            var pageToHideId = 4;
+            var pageToHide = null;
+
+            haveOnePageHidden = false;
+            for (; pageToHideId <= currentPage - 3; pageToHideId++) {
+                pageToHide = document.getElementById('page_' + pageToHideId);
+
+                pageToHide.style.display = 'none';
+                haveOnePageHidden = true;
+            }
+
+            /* Punctele de suspensie */
+            if (haveOnePageHidden === true) {
+                pageToHide.insertAdjacentHTML('afterEnd',
+                    '<div class="ephemerText" style="display: inline-block;">...</div>');
+            }
+
+            haveOnePageHidden = false;
+            for (pageToHideId = currentPage + 3; pageToHideId <= @lastPageNumber - 3; pageToHideId++) {
+                pageToHide = document.getElementById('page_' + pageToHideId);
+
+                pageToHide.style.display = 'none';
+                haveOnePageHidden = true;
+            }
+
+            if (haveOnePageHidden === true) {
+                pageToHide.insertAdjacentHTML('afterEnd',
+                    '<div class="ephemerText" style="display: inline-block;">...</div>');
+            }
+
+            /* Change the color of the current button and of the old one */
+            for (var i = 1; i <= @lastPageNumber; ++i) {
+                document.getElementById("page_" + i).style.color = 'white';
+            }
+            currentPageButton.style.color = 'yellow';
+
+            /* Use AJAX to get the highscore */
+            var ourRequest = new XMLHttpRequest();
+            ourRequest.open('GET', 'http://localhost:51664/Home/Highscore/Json/' + currentPage);
+
+            ourRequest.onload = function() {
+                var ourData = JSON.parse(ourRequest.responseText);
+
+                if (ourData.length < 10) {
+                    isLastPage = true;
+                }
+
+                for (var ii = 0; ii < ourData.length; ++ii) {
+                    var rankTd3 = document.getElementById("h_rank_" + ii);
+                    var nicknameTd3 = document.getElementById("h_nickname_" + ii);
+                    var valueTd3 = document.getElementById("h_value_" + ii);
+
+                    rankTd3.innerHTML = (currentPage - 1) * 10 + (ii + 1);
+                    nicknameTd3.innerHTML = ourData[ii].nickname;
+                    valueTd3.innerHTML = ourData[ii].value;
+                }
+
+                for (var j = ourData.length; j < 10; ++j) {
+                    var rankTd4 = document.getElementById("h_rank_" + j);
+                    var nicknameTd4 = document.getElementById("h_nickname_" + j);
+                    var valueTd4 = document.getElementById("h_value_" + j);
+
+                    rankTd4.innerHTML = "";
+                    nicknameTd4.innerHTML = "";
+                    valueTd4.innerHTML = "";
+                }
+            }
+
+            ourRequest.send();
+        }
+
+        @*for (var i = 1; i <= @lastPageNumber; ++i) {
             var currentPageButton = document.getElementById("page_" + i);
+            currentPage = currentPageButton.value;
 
             currentPageButton.addEventListener("click",
                 function () {
-
-                /* Display and hide too far away pages */
-                var next2Page = currentPage + 2;
-                if (next2Page < @lastPageNumber - 2) {
-                    document.getElementById('page_' + next2Page).style.display = 'inline-block';
-                }
-
-                var prev3Page = currentPage - 3;
-                if (prev3Page > 3 && prev3Page < @lastPageNumber - 2) {
-                    document.getElementById('page_' + prev3Page).style.display = 'none';
-                }
-
-                /* Sterge punctele de suspensie */
-                var textsToBeDeleted = document.getElementsByClassName("ephemerText");
-                for (var k = 0; k < textsToBeDeleted.length; ++k) {
-                    textsToBeDeleted[k].parentNode.removeChild(textsToBeDeleted[k]);
-                    --k;
-                }
-
-                /* Adaugam noile puncte de suspensie */
-                if (prev3Page > 3) {
-                    document.getElementById('page_' + prev3Page).insertAdjacentHTML('afterEnd',
-                        '<div class="ephemerText" style="display: inline-block;">...</div>');
-                }
-
-                if (next2Page < @lastPageNumber - 3) {
-                    document.getElementById('page_' + next2Page).insertAdjacentHTML('afterEnd',
-                        '<div class="ephemerText" style="display: inline-block;">...</div>');
-                }
-
-                /* Change the color of the current button and of the old one */
-                currentPageButton.style.color = 'white';
-                currentPageButton = document.getElementById("page_" + currentPage);
-                currentPageButton.style.color = 'yellow';
-
-                var ourRequest = new XMLHttpRequest();
-                ourRequest.open('GET', 'http://localhost:51664/Home/Highscore/Json/' + currentPage);
-
-                ourRequest.onload = function() {
-                    var ourData = JSON.parse(ourRequest.responseText);
-
-                    if (ourData.length < 10) {
-                        isLastPage = true;
+                    /* Sterge punctele de suspensie */
+                    var textsToBeDeleted = document.getElementsByClassName("ephemerText");
+                    for (var k = 0; k < textsToBeDeleted.length; ++k) {
+                        textsToBeDeleted[k].parentNode.removeChild(textsToBeDeleted[k]);
+                        --k;
                     }
 
-                    for (var i = 0; i < ourData.length; ++i) {
-                        var rankTd3 = document.getElementById("h_rank_" + i);
-                        var nicknameTd3 = document.getElementById("h_nickname_" + i);
-                        var valueTd3 = document.getElementById("h_value_" + i);
+                    /* Display and hide too far away pages */
+                    var pageToHideId = 4;
+                    alert(currentPage);
+                    for (; pageToHideId <= currentPage - 3; pageToHideId++) {
+                        pageToHide = document.getElementById('page_' + pageToHideId);
 
-                        rankTd3.innerHTML = (currentPage - 1) * 10 + (i + 1);
-                        nicknameTd3.innerHTML = ourData[i].nickname;
-                        valueTd3.innerHTML = ourData[i].value;
+                        pageToHide.style.display = 'none';
+                        haveOnePageHidden = true;
                     }
 
-                    for (var j = ourData.length; j < 10; ++j) {
-                        var rankTd4 = document.getElementById("h_rank_" + j);
-                        var nicknameTd4 = document.getElementById("h_nickname_" + j);
-                        var valueTd4 = document.getElementById("h_value_" + j);
-
-                        rankTd4.innerHTML = "";
-                        nicknameTd4.innerHTML = "";
-                        valueTd4.innerHTML = "";
+                    /* Punctele de suspensie */
+                    if (haveOnePageHidden === true) {
+                        pageToHide.insertAdjacentHTML('afterEnd',
+                            '<div class="ephemerText" style="display: inline-block;">...</div>');
                     }
-                }
 
-                ourRequest.send();
+                    haveOnePageHidden = false;
+                    for (pageToHideId = currentPage + 3; pageToHideId <= @lastPageNumber - 3; pageToHideId++) {
+                        pageToHide = document.getElementById('page_' + pageToHideId);
+
+                        pageToHide.style.display = 'none';
+                        haveOnePageHidden = true;
+                    }
+
+                    if (haveOnePageHidden === true) {
+                        pageToHide.insertAdjacentHTML('afterEnd',
+                            '<div class="ephemerText" style="display: inline-block;">...</div>');
+                    }
+
+                    /* Change the color of the current button and of the old one */
+
+
             });
-        }
+        }*@
     </script>
 }
