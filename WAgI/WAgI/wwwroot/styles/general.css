@@ -1,18 +1,18 @@
- body{
+body {
     background-repeat: no-repeat center center fixed;
     background-size: cover;
     zoom: 100%;
 }
 
-.big-container{
+.big-container {
     position: relative;
     align-content: center;
     text-align: center;
-    color:white;
-    top:0px;
+    color: white;
+    top: 0px;
     left: 0px;
-    
 }
+
 .container {
     width: 90%;
     margin-left: 5%;
@@ -22,55 +22,62 @@
     top: 2rem;
 }
 
-h5{
-    color:white;
-    margin-top:-1rem;
+h5 {
+    color: white;
+    margin-top: -1rem;
     font-family: 'Acme', sans-serif;
 }
 
-.cnvs-container{
-    position:relative;
+.cnvs-container {
+    position: relative;
     display: flex;
     justify-content: center;
     vertical-align: middle;
 }
 
-.cnvs{
-    border:2px solid rgb(230,194,0);
+.cnvs {
+    border: 2px solid rgb(230,194,0);
 }
-.buttons{
-    margin-top:3rem;
+
+.buttons {
+    margin-top: 3rem;
 }
-.button{
-    background:transparent;
+
+.button {
+    background: transparent;
     color: WHITE;
     cursor: pointer;
     border: 0px;
     font-family: 'Acme', sans-serif;
-    font-size: 30px;    
+    font-size: 30px;
     font-weight: bold;
     margin-bottom: 1rem;
     width: 12rem;
 }
-.button:hover{
-    color:rgb(230,194,0);
-}
-.button:focus{
-   outline:none;    
-}
-#backButtonPlay{
+
+    .button:hover {
+        color: rgb(230,194,0);
+    }
+
+    .button:focus {
+        outline: none;
+    }
+
+#backButtonPlay {
     position: relative;
     top: 15rem;
     width: 20rem;
 }
 
 /*game canvasses*/
-.cnvs{
+.cnvs {
     position: absolute;
 }
+
 #background {
     z-index: -2;
 }
+
 #main {
     z-index: -1;
 }
@@ -81,15 +88,15 @@ h5{
 
 /*About page */
 
-.description-text{  
+.description-text {
     margin-top: 4rem;
     clear: both;
     max-width: 50rem;
-    font-family:'Acme', sans-serif;
-    font-size: 25px;   
+    font-family: 'Acme', sans-serif;
+    font-size: 25px;
 }
 
-#about-page{
+#about-page {
     display: inline-block;
     position: relative;
     width: 50rem;
@@ -98,44 +105,44 @@ h5{
 
 /*How to play*/
 
-.instructions-image{
-    float:left;
-    max-width:12rem;
+.instructions-image {
+    float: left;
+    max-width: 12rem;
     max-height: 4rem;
 }
 
-#arrows{
+#arrows {
     position: relative;
-    left:3rem;
+    left: 3rem;
 }
 
-#space-bar{
-    margin-top:1.5rem;
+#space-bar {
+    margin-top: 1.5rem;
 }
 
-.instructions-text{
+.instructions-text {
     display: inline-block;
     position: relative;
-    left:2rem;
-
+    left: 2rem;
 }
 
-#how-to-play-page{
+#how-to-play-page {
     display: inline-block;
     width: 30rem;
 }
+
 .info-box {
-   max-width: inherit;
+    max-width: inherit;
 }
 
-#arrows-text{
-   margin-left: 7rem;
+#arrows-text {
+    margin-left: 7rem;
 }
 
-#back-button-how-to-play{
+#back-button-how-to-play {
     position: relative;
     top: 10rem;
-    left:4rem;
+    left: 4rem;
     width: 20rem;
 }
 
@@ -143,51 +150,50 @@ h5{
 
 
 
-.dialog-box{
+.dialog-box {
     position: relative;
     background-color: black;
-    border:2px solid white;
+    border: 2px solid white;
     width: 45rem;
-    display:inline-block;
-    font-family:'Acme', sans-serif;
+    display: inline-block;
+    font-family: 'Acme', sans-serif;
 }
 
-.dialog-box img{
-    float: left;
-    
-}
+    .dialog-box img {
+        float: left;
+    }
 
 
-#nickname-input:focus{
+#nickname-input:focus {
     outline: none;
 }
 
 
-#intro-auxiliar-text{
+#intro-auxiliar-text {
     position: relative;
     font-size: 15px;
-    color:white;
+    color: white;
     opacity: 0.7;
 }
 
-.next-button{
+.next-button {
     max-width: 3rem;
     font-family: 'Acme', sans-serif;
     font-size: 20px;
     position: absolute;
-    top:8.5rem;
-    left:41.5rem;
+    top: 8.5rem;
+    left: 41.5rem;
     color: white;
     display: inline-block;
-    border:0px;
+    border: 0px;
     background-color: black;
-    outline:none;
+    outline: none;
     cursor: pointer;
 }
 
-.next-button:hover{
-    color:rgb(230,194,0);
-}
+    .next-button:hover {
+        color: rgb(230,194,0);
+    }
 
 .startBoxDiv {
     z-index: 3;
@@ -199,12 +205,35 @@ h5{
     font-size: 30px;
 }
 
-.startBoxDiv span {
-   position: relative;
-   font-size: 60px;
-   cursor: pointer;
+    .startBoxDiv span {
+        position: relative;
+        font-size: 60px;
+        cursor: pointer;
+    }
+
+        .startBoxDiv span:hover {
+            color: rgb(230,194,0);
+        }
+
+.pagination {
+    color: WHITE;
 }
 
-.startBoxDiv span:hover {
-        color: rgb(230,194,0);
-}
+    .pagination input {
+        background: transparent;
+        color: WHITE;
+        cursor: pointer;
+        border: 0;
+        font-family: 'Acme', sans-serif;
+        font-size: 30px;
+        font-weight: bold;
+        width: 2.25rem;
+    }
+
+        .pagination input:hover {
+            color: rgb(230,194,0);
+        }
+
+        .pagination input:focus {
+            outline: none;
+        }

@@ -14,7 +14,3 @@ leftButton.addEventListener("click", function () {
 
     ourRequest.send();
 });
-
-function renderHTML(data) {
-    firstRow.insertAdjacentHTML('beforeend', 'testing 123');
-}

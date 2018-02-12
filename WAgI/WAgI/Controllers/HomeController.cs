@@ -87,7 +87,7 @@ namespace WAgI.Controllers
             {
                 TempData["lastPageNumber"] = scoresCount / 10 + 1;
             }
-            
+
             return View(await _context.Scores
                 .OrderByDescending(score => score.Value)
                 .Skip((pageNumber - 1) * 10)
@@ -96,8 +96,8 @@ namespace WAgI.Controllers
             );
         }
 
-        [Route("Home/Highscore/PlayerList/{pageNumber}")]
-        public async Task<IActionResult> PlayerList(int pageNumber)
+        [Route("Home/Highscore/Json/{pageNumber}")]
+        public async Task<IActionResult> GetPlayersList(int pageNumber)
         {
             return Json(await _context.Scores
                 .OrderByDescending(score => score.Value)

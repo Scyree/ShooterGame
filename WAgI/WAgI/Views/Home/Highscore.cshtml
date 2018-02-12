@@ -38,112 +38,58 @@
         background-color: rgb(230, 194, 0);
         color: black;
     }
-
-    #cwebaca {
-        position: relative;
-        display: inline-block;
-        left: auto;
-        max-width: 15rem;
-        height: 20rem;
-    }
-
-    .pagination a {
-        font-family: 'Acme', sans-serif;
-        font-size: 25px;
-        color: white;
-        text-decoration: none;
-    }
-
-    .pagination a:hover {
-        color: rgb(230, 194, 0);
-    }
 </style>
 
 <div class="tabel-container">
     <img alt="logo" src="../../images/logo.png" />
 
     <h5>In a galaxy far far away ...4 developers tried to conquer the universe</h5>
-    <button id="stanga">Stanga</button>
+    <input class="button" type="button" id="leftButton" value="Prev" />
     <table class="table">
         <thead>
-        <tr>
-            <th>
-                Rank
-            </th>
-            <th>
-                Nickname
-            </th>
-            <th>
-                Score
-            </th>
-        </tr>
+            <tr>
+                <th>
+                    Rank
+                </th>
+                <th>
+                    Nickname
+                </th>
+                <th>
+                    Score
+                </th>
+            </tr>
         </thead>
         <tbody>
-        @{
-            var i = (pageIndex - 1) * 10 + 1;
-            var j = 0;
-            foreach (var item in Model)
-            {
-                <tr>
-                    <td id="h_rank_@j">
-                        @i
-                    </td>
-                    <td id="h_nickname_@j">
-                        @Html.DisplayFor(modelItem => item.Nickname)
-                    </td>
-                    <td id="h_value_@j">
-                        @Html.DisplayFor(modelItem => item.Value)
-                    </td>
-                </tr>
+            @{
+                var i = (pageIndex - 1) * 10 + 1;
+                var j = 0;
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td id="h_rank_@j">
+                            @i
+                        </td>
+                        <td id="h_nickname_@j">
+                            @Html.DisplayFor(modelItem => item.Nickname)
+                        </td>
+                        <td id="h_value_@j">
+                            @Html.DisplayFor(modelItem => item.Value)
+                        </td>
+                    </tr>
 
-                ++i;
-                ++j;
+                    ++i;
+                    ++j;
+                }
             }
-        }
         </tbody>
-        @*<img alt="cwebaca" id="cwebaca" src="/images/cwebaca.png" />*@
     </table>
 
-
-    <button id="dreapta">Dreapta</button>
+    <input class="button" type="button" id="rightButton" value="Next" />
 
     <div class="pagination">
-        @{
-            var i1 = pageIndex - 1;
-            var i2 = pageIndex;
-            var i3 = pageIndex + 1;
-
-            if (i1 != 1 && pageIndex != 1)
-            {
-                <a href="1">1</a>
-            }
-
-            if (i2 > 3)
-            {
-                <text>...</text>
-            }
-
-            if (i1 > 0)
-            {
-                <a href="@i1">@i1</a>
-            }
-
-            <a href="@i2">@i2</a>
-
-            if (pageIndex != lastPageNumber)
-            {
-                <a href="@i3">@i3</a>
-            }
-
-            if (i3 < lastPageNumber - 1)
-            {
-                <text>...</text>
-            }
-
-            if (pageIndex != lastPageNumber && i3 != lastPageNumber)
-            {
-                <a href="@lastPageNumber">@lastPageNumber</a>
-            }
+        @for (i = 1; i <= lastPageNumber; ++i)
+        {
+            <input type="button" id="page_@i" value="@i" />
         }
     </div>
 
@@ -164,82 +110,269 @@
 </div>
 
 @section Scripts
-{
+    {
     <script>
-        var currentPage = 3;
+        var pathArray = window.location.pathname.split('/');
+        var currentPage = parseInt(pathArray[pathArray.length - 1]);
 
-        var leftButton = document.getElementById("stanga");
-        var rightButton = document.getElementById("dreapta");
+        /* Hide the pages that are too far away from the current page */
+        var haveOnePageHidden = false;
+        var pageToHideId = 4;
+        for (; pageToHideId <= currentPage - 3; pageToHideId++) {
+            pageToHide = document.getElementById('page_' + pageToHideId);
 
-        leftButton.addEventListener("click", function () {
-            if (currentPage > 1) {
-                currentPage--;
+            pageToHide.style.display = 'none';
+            haveOnePageHidden = true;
+        }
 
-                var ourRequest = new XMLHttpRequest();
-                ourRequest.open('GET', 'http://localhost:51664/Home/Highscore/PlayerList/' + currentPage);
+        /* Punctele de suspensie */
+        if (haveOnePageHidden === true) {
+            pageToHide.insertAdjacentHTML('afterEnd',
+                '<div class="ephemerText" style="display: inline-block;">...</div>');
+        }
 
-                ourRequest.onload = function () {
-                    var ourData = JSON.parse(ourRequest.responseText);
-                    console.log(ourData);
-                    for (var i = 0; i < ourData.length; ++i) {
-                        var rankTd = document.getElementById("h_rank_" + i);
-                        var nicknameTd = document.getElementById("h_nickname_" + i);
-                        var valueTd = document.getElementById("h_value_" + i);
+        haveOnePageHidden = false;
+        for (pageToHideId = currentPage + 3; pageToHideId <= @lastPageNumber - 3; pageToHideId++) {
+            pageToHide = document.getElementById('page_' + pageToHideId);
 
-                        rankTd.innerHTML = (currentPage - 1) * 10 + i + 1;
-                        nicknameTd.innerHTML = ourData[i].nickname;
-                        valueTd.innerHTML = ourData[i].value;
+            pageToHide.style.display = 'none';
+            haveOnePageHidden = true;
+        }
+
+        if (haveOnePageHidden === true) {
+            pageToHide.insertAdjacentHTML('afterEnd',
+                '<div class="ephemerText" style="display: inline-block;">...</div>');
+        }
+
+        /* Make the current page button yellow */
+        var currentPageButton = document.getElementById("page_" + currentPage);
+        currentPageButton.style.color = 'yellow';
+
+        var leftButton = document.getElementById("leftButton");
+        var rightButton = document.getElementById("rightButton");
+
+        /* Funcitonality of "Prev" button */
+        var isLastPage = false;
+        leftButton.addEventListener("click",
+            function() {
+                isLastPage = false;
+
+                if (currentPage > 1) {
+                    currentPage--;
+
+                    /* Display and hide too far away pages */
+                    var prev2Page = currentPage - 2;
+                    if (prev2Page > 3) {
+                        document.getElementById('page_' + prev2Page).style.display = 'inline-block';
                     }
 
-                    for (var i = ourData.length; i < 10; ++i) {
-                        var rankTd = document.getElementById("h_rank_" + i);
-                        var nicknameTd = document.getElementById("h_nickname_" + i);
-                        var valueTd = document.getElementById("h_value_" + i);
+                    var next3Page = currentPage + 3;
+                    if (next3Page < @lastPageNumber - 2 && next3Page > 3) {
+                        document.getElementById('page_' + next3Page).style.display = 'none';
+                    }
 
-                        rankTd.innerHTML = "";
-                        nicknameTd.innerHTML = "";
-                        valueTd.innerHTML = "";
+                    /* Stergem punctele de suspensie */
+                    var textsToBeDeleted = document.getElementsByClassName("ephemerText");
+                    for (var k = 0; k < textsToBeDeleted.length; ++k) {
+                        textsToBeDeleted[k].parentNode.removeChild(textsToBeDeleted[k]);
+                        --k;
+                    }
+
+                    /* Adaugam noile puncte de suspensie */
+                    if (prev2Page > 3) {
+                        document.getElementById('page_' + prev2Page).insertAdjacentHTML('beforeBegin',
+                            '<div class="ephemerText" style="display: inline-block;">...</div>');
+                    }
+
+                    if (next3Page < @lastPageNumber - 2) {
+                        document.getElementById('page_' + next3Page).insertAdjacentHTML('afterEnd',
+                            '<div class="ephemerText" style="display: inline-block;">...</div>');
+                    }
+
+                    /* Change the color of the current button and of the old one */
+                    currentPageButton.style.color = 'white';
+                    currentPageButton = document.getElementById("page_" + currentPage);
+                    currentPageButton.style.color = 'yellow';
+
+                    var ourRequest = new XMLHttpRequest();
+                    ourRequest.open('GET', 'http://localhost:51664/Home/Highscore/Json/' + currentPage);
+
+                    ourRequest.onload = function() {
+                        var ourData = JSON.parse(ourRequest.responseText);
+
+                        for (var i = 0; i < ourData.length; ++i) {
+                            var rankTd = document.getElementById("h_rank_" + i);
+                            var nicknameTd = document.getElementById("h_nickname_" + i);
+                            var valueTd = document.getElementById("h_value_" + i);
+
+                            rankTd.innerHTML = (currentPage - 1) * 10 + i + 1;
+                            nicknameTd.innerHTML = ourData[i].nickname;
+                            valueTd.innerHTML = ourData[i].value;
+                        }
+
+                        for (var j = ourData.length; j < 10; ++j) {
+                            var rankTd2 = document.getElementById("h_rank_" + j);
+                            var nicknameTd2 = document.getElementById("h_nickname_" + j);
+                            var valueTd2 = document.getElementById("h_value_" + j);
+
+                            rankTd2.innerHTML = "";
+                            nicknameTd2.innerHTML = "";
+                            valueTd2.innerHTML = "";
+                        }
+                    }
+
+                    ourRequest.send();
+                }
+            });
+
+        /* Funcitonality of "Next" button */
+        rightButton.addEventListener("click",
+            function() {
+                if (isLastPage === false) {
+                    currentPage++;
+
+                    /* Display and hide too far away pages */
+                    var next2Page = currentPage + 2;
+                    if (next2Page < @lastPageNumber - 2) {
+                        document.getElementById('page_' + next2Page).style.display = 'inline-block';
+                    }
+
+                    var prev3Page = currentPage - 3;
+                    if (prev3Page > 3 && prev3Page < @lastPageNumber - 2) {
+                        document.getElementById('page_' + prev3Page).style.display = 'none';
+                    }
+
+                    /* Sterge punctele de suspensie */
+                    var textsToBeDeleted = document.getElementsByClassName("ephemerText");
+                    for (var k = 0; k < textsToBeDeleted.length; ++k) {
+                        textsToBeDeleted[k].parentNode.removeChild(textsToBeDeleted[k]);
+                        --k;
+                    }
+
+                    /* Adaugam noile puncte de suspensie */
+                    if (prev3Page > 3) {
+                        document.getElementById('page_' + prev3Page).insertAdjacentHTML('afterEnd',
+                            '<div class="ephemerText" style="display: inline-block;">...</div>');
+                    }
+
+                    if (next2Page < @lastPageNumber - 3) {
+                        document.getElementById('page_' + next2Page).insertAdjacentHTML('afterEnd',
+                            '<div class="ephemerText" style="display: inline-block;">...</div>');
+                    }
+
+                    /* Change the color of the current button and of the old one */
+                    currentPageButton.style.color = 'white';
+                    currentPageButton = document.getElementById("page_" + currentPage);
+                    currentPageButton.style.color = 'yellow';
+
+                    var ourRequest = new XMLHttpRequest();
+                    ourRequest.open('GET', 'http://localhost:51664/Home/Highscore/Json/' + currentPage);
+
+                    ourRequest.onload = function() {
+                        var ourData = JSON.parse(ourRequest.responseText);
+
+                        if (ourData.length < 10) {
+                            isLastPage = true;
+                        }
+
+                        for (var i = 0; i < ourData.length; ++i) {
+                            var rankTd3 = document.getElementById("h_rank_" + i);
+                            var nicknameTd3 = document.getElementById("h_nickname_" + i);
+                            var valueTd3 = document.getElementById("h_value_" + i);
+
+                            rankTd3.innerHTML = (currentPage - 1) * 10 + (i + 1);
+                            nicknameTd3.innerHTML = ourData[i].nickname;
+                            valueTd3.innerHTML = ourData[i].value;
+                        }
+
+                        for (var j = ourData.length; j < 10; ++j) {
+                            var rankTd4 = document.getElementById("h_rank_" + j);
+                            var nicknameTd4 = document.getElementById("h_nickname_" + j);
+                            var valueTd4 = document.getElementById("h_value_" + j);
+
+                            rankTd4.innerHTML = "";
+                            nicknameTd4.innerHTML = "";
+                            valueTd4.innerHTML = "";
+                        }
+                    }
+
+                    ourRequest.send();
+                }
+            });
+
+        for (var i = 0; i < @lastPageNumber; ++i) {
+            var currentPageButton = document.getElementById("page_" + i);
+
+            currentPageButton.addEventListener("click",
+                function () {
+
+                /* Display and hide too far away pages */
+                var next2Page = currentPage + 2;
+                if (next2Page < @lastPageNumber - 2) {
+                    document.getElementById('page_' + next2Page).style.display = 'inline-block';
+                }
+
+                var prev3Page = currentPage - 3;
+                if (prev3Page > 3 && prev3Page < @lastPageNumber - 2) {
+                    document.getElementById('page_' + prev3Page).style.display = 'none';
+                }
+
+                /* Sterge punctele de suspensie */
+                var textsToBeDeleted = document.getElementsByClassName("ephemerText");
+                for (var k = 0; k < textsToBeDeleted.length; ++k) {
+                    textsToBeDeleted[k].parentNode.removeChild(textsToBeDeleted[k]);
+                    --k;
+                }
+
+                /* Adaugam noile puncte de suspensie */
+                if (prev3Page > 3) {
+                    document.getElementById('page_' + prev3Page).insertAdjacentHTML('afterEnd',
+                        '<div class="ephemerText" style="display: inline-block;">...</div>');
+                }
+
+                if (next2Page < @lastPageNumber - 3) {
+                    document.getElementById('page_' + next2Page).insertAdjacentHTML('afterEnd',
+                        '<div class="ephemerText" style="display: inline-block;">...</div>');
+                }
+
+                /* Change the color of the current button and of the old one */
+                currentPageButton.style.color = 'white';
+                currentPageButton = document.getElementById("page_" + currentPage);
+                currentPageButton.style.color = 'yellow';
+
+                var ourRequest = new XMLHttpRequest();
+                ourRequest.open('GET', 'http://localhost:51664/Home/Highscore/Json/' + currentPage);
+
+                ourRequest.onload = function() {
+                    var ourData = JSON.parse(ourRequest.responseText);
+
+                    if (ourData.length < 10) {
+                        isLastPage = true;
+                    }
+
+                    for (var i = 0; i < ourData.length; ++i) {
+                        var rankTd3 = document.getElementById("h_rank_" + i);
+                        var nicknameTd3 = document.getElementById("h_nickname_" + i);
+                        var valueTd3 = document.getElementById("h_value_" + i);
+
+                        rankTd3.innerHTML = (currentPage - 1) * 10 + (i + 1);
+                        nicknameTd3.innerHTML = ourData[i].nickname;
+                        valueTd3.innerHTML = ourData[i].value;
+                    }
+
+                    for (var j = ourData.length; j < 10; ++j) {
+                        var rankTd4 = document.getElementById("h_rank_" + j);
+                        var nicknameTd4 = document.getElementById("h_nickname_" + j);
+                        var valueTd4 = document.getElementById("h_value_" + j);
+
+                        rankTd4.innerHTML = "";
+                        nicknameTd4.innerHTML = "";
+                        valueTd4.innerHTML = "";
                     }
                 }
 
                 ourRequest.send();
-            }
-        });
-
-        rightButton.addEventListener("click", function () {
-            if (currentPage < 9) {
-                currentPage++;
-
-                var ourRequest = new XMLHttpRequest();
-                ourRequest.open('GET', 'http://localhost:51664/Home/Highscore/PlayerList/' + currentPage);
-
-                ourRequest.onload = function () {
-                    var ourData = JSON.parse(ourRequest.responseText);
-                    console.log(ourData);
-                    for (var i = 0; i < ourData.length; ++i) {
-                        var rankTd = document.getElementById("h_rank_" + i);
-                        var nicknameTd = document.getElementById("h_nickname_" + i);
-                        var valueTd = document.getElementById("h_value_" + i);
-
-                        rankTd.innerHTML = (currentPage - 1) * 10 + (i + 1);
-                        nicknameTd.innerHTML = ourData[i].nickname;
-                        valueTd.innerHTML = ourData[i].value;
-                    }
-
-                    for (var i = ourData.length; i < 10; ++i) {
-                        var rankTd = document.getElementById("h_rank_" + i);
-                        var nicknameTd = document.getElementById("h_nickname_" + i);
-                        var valueTd = document.getElementById("h_value_" + i);
-
-                        rankTd.innerHTML = "";
-                        nicknameTd.innerHTML = "";
-                        valueTd.innerHTML = "";
-                    }
-                }
-
-                ourRequest.send();
-            }
-        });
-
-    </script> 
+            });
+        }
+    </script>
 }
